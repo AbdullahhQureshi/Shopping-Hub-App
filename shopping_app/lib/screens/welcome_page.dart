@@ -1,3 +1,5 @@
+import 'package:shopping_app/screens/allproduct_screen.dart';
+
 import 'login.dart';
 import 'signup.dart';
 import 'package:flutter/material.dart';
@@ -89,6 +91,25 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       child: Text(
                         'Sign Up',
                         style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 20, vertical: 10.0),
+                    child: FlatButton(
+                      padding: EdgeInsets.all(15),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Allproduct(),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        'Skip',
+                        style: TextStyle(color: Colors.black),
                       ),
                     ),
                   ),
