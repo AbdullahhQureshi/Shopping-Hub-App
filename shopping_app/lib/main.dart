@@ -1,23 +1,34 @@
+import 'package:flutter/foundation.dart';
+import 'package:shopping_app/provider/auth.dart';
 import 'package:shopping_app/provider/products.dart';
 import 'package:shopping_app/provider/cart.dart';
 import 'package:shopping_app/screens/allproduct_screen.dart';
+import 'package:shopping_app/screens/edit_product_screen.dart';
 import 'package:shopping_app/screens/order_screen.dart';
 import 'package:shopping_app/screens/productdetail_screen.dart';
+import 'package:shopping_app/screens/user_screen.dart';
 import 'package:shopping_app/screens/welcome_page.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_app/screens/cart_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shopping_app/provider/order.dart';
+import 'package:device_preview/device_preview.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+     MyApp(), // Wrap your app
+  );
 }
 
 class MyApp extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(context) {
     return MultiProvider(
         providers: [
+
+          ChangeNotifierProvider.value(
+            value: Auth(),
+          ),
           ChangeNotifierProvider(
             create: (context) => Products(),
           ),
@@ -28,11 +39,17 @@ class MyApp extends StatelessWidget {
             create: (context) => Orders(),
           )
         ],
-        child: MaterialApp(home: WelcomeScreen(), routes: {
-          Productdetail.routName: (ctx) => Productdetail(),
-          CartScreen.routeName: (ctx) => CartScreen(),
-          OrdersScreen.routeName: (ctx) => OrdersScreen(),
-          Allproduct.routeName: (ctx) => Allproduct(),
-        }));
+        child: Consumer<Auth>(
+            builder: (ctx, auth, _) => MaterialApp(
+                    home: auth.isAuth ? Allproduct() : WelcomeScreen(),
+                    routes: {
+                      Productdetail.routName: (ctx) => Productdetail(),
+                      CartScreen.routeName: (ctx) => CartScreen(),
+                      OrdersScreen.routeName: (ctx) => OrdersScreen(),
+                      Allproduct.routeName: (ctx) => Allproduct(),
+                      UserProductsScreen.routeName: (ctx) =>
+                          UserProductsScreen(),
+                      EditProductScreen.routeName: (ctx) => EditProductScreen(),
+                    })));
   }
 }

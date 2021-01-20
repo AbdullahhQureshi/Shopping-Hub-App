@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'file:///E:/projects/shopping_app/lib/provider/product.dart';
+import 'package:shopping_app/provider/product.dart';
 import 'package:shopping_app/provider/cart.dart';
 import 'package:shopping_app/screens/productdetail_screen.dart';
 
@@ -45,9 +45,9 @@ class Productitem extends StatelessWidget {
           Icons.shopping_cart,
         ),
         onPressed: () {
-          cart.addItem(product.id, product.price, product.title);
+          cart.addItem(product.id, product.price, product.title,product.imageurl);
         },
-        color: Theme.of(context).accentColor,
+        //color: Theme.of(context).accentColor,
       ),
     );
   }

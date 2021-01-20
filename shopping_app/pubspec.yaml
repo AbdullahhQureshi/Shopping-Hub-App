@@ -24,8 +24,13 @@ dependencies:
   flutter:
     sdk: flutter
   font_awesome_flutter: '>= 4.7.0' #no indentation
-  provider: ^3.0.0
+  provider: ^4.3.2+4
   intl: ^0.16.1
+  consumer: ^2.0.0
+  http: ^0.12.2
+  device_preview: ^0.5.5
+  speech_recognition: ^0.3.0+1
+  permission: ^0.1.7
 
 
   # The following adds the Cupertino Icons font to your application.

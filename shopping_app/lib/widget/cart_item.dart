@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:shopping_app/provider/cart.dart';
+
+import 'package:shopping_app/widget/permission_dialog.dart';
 
 class CartItem extends StatelessWidget {
   final String id;
@@ -9,6 +10,7 @@ class CartItem extends StatelessWidget {
   final double price;
   final int quantity;
   final String title;
+  final String imageurl;
 
   CartItem(
     this.id,
@@ -16,6 +18,7 @@ class CartItem extends StatelessWidget {
     this.price,
     this.quantity,
     this.title,
+      this.imageurl
   );
 
   @override
@@ -37,9 +40,11 @@ class CartItem extends StatelessWidget {
         ),
       ),
       direction: DismissDirection.endToStart,
-      onDismissed: (direction) {
-        Provider.of<Cart>(context, listen: false).removeItem(productId);
+      // ignore: missing_return
+      confirmDismiss: (direction){
+         showDialog(context: context,builder:(ctx)=>Permissiondialog(productId) );
       },
+
       child: Card(
         margin: EdgeInsets.symmetric(
           horizontal: 15,
@@ -49,6 +54,7 @@ class CartItem extends StatelessWidget {
           padding: EdgeInsets.all(8),
           child: ListTile(
             leading: CircleAvatar(
+
               child: Padding(
                 padding: EdgeInsets.all(5),
                 child: FittedBox(

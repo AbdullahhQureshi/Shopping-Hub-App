@@ -1,79 +1,61 @@
 import 'package:flutter/foundation.dart';
 
-class CartItem {
+class SearchedItem {
   final String id;
   final String title;
-  final int quantity;
+  final String discription;
   final double price;
   final String imageurl;
 
-  CartItem({
+  SearchedItem({
     @required this.id,
     @required this.title,
-    @required this.quantity,
+    @required this.discription,
     @required this.price,
     @required this.imageurl,
   });
 }
 
-class Cart with ChangeNotifier {
-  Map<String, CartItem> _items = {};
+class Searched with ChangeNotifier {
+  Map<String, SearchedItem> _items = {};
 
-  Map<String, CartItem> get items {
+  Map<String, SearchedItem> get items {
     return {..._items};
   }
 
-  int get itemCount {
-    return _items.length;
-  }
-
-  double get totalAmount {
-    var total = 0.0;
-    _items.forEach((key, cartItem) {
-      total += cartItem.price * cartItem.quantity;
-    });
-    return total;
-  }
-
-  void addItem(
-    String productId,
-    double price,
-    String title,
+ /* void addSearchedItem(
+      String productId,
+      double price,
+      String title,
       String imageurl,
-  ) {
+      ) {
     if (_items.containsKey(productId)) {
       // change quantity...
       _items.update(
         productId,
-        (existingCartItem) => CartItem(
+            (existingCartItem) => SearchedItem(
           id: existingCartItem.id,
           title: existingCartItem.title,
           price: existingCartItem.price,
-          quantity: existingCartItem.quantity + 1,
+         // quantity: existingCartItem.quantity + 1,
           imageurl: existingCartItem.imageurl,
         ),
       );
     } else {
       _items.putIfAbsent(
         productId,
-        () => CartItem(
+            () => SearchedItem(
           id: DateTime.now().toString(),
           title: title,
           price: price,
-          quantity: 1,
+         // quantity: 1,
         ),
       );
     }
     notifyListeners();
-  }
+  }*/
 
-  void removeItem(String productId) {
-    _items.remove(productId);
-    notifyListeners();
-  }
 
-  void clear() {
-    _items = {};
-    notifyListeners();
-  }
+
+
 }

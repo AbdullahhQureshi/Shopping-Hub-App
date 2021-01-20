@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shopping_app/provider/product.dart';
+//import 'package:shopping_app/provider/product.dart';
 import 'package:shopping_app/provider/products.dart';
 
 class Productdetail extends StatelessWidget {
   static const routName = '/product_detail';
+
   @override
   Widget build(BuildContext context) {
     final productID = ModalRoute.of(context).settings.arguments as String;
+
     final loadedProduct = Provider.of<Products>(
       context,
       listen: false,
     ).findById(productID);
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.orange,
         title: Text(loadedProduct.title),
       ),
       body: Column(
@@ -33,20 +36,19 @@ class Productdetail extends StatelessWidget {
             ),
             tileColor: Colors.white60,
             // ignore: missing_required_param
-            /*trailing: Consumer<Product>(
-                builder: (ctx, product, _) => IconButton(
-                  icon: Icon(
-                    product.isfavorite ? Icons.favorite : Icons.favorite_border,
-                  ),
-                  color: Theme.of(context).accentColor,
-                  onPressed: () {
-                    product.toggleFavoriteStatus();
-                  },
+            trailing: IconButton(
+                icon: Icon(
+                  loadedProduct.isfavorite
+                      ? Icons.favorite
+                      : Icons.favorite_border,
                 ),
-              )
-              */
-          ),
-          SizedBox(height: 10),
+                color: Theme.of(context).accentColor,
+                onPressed: () {
+
+                },
+              ),
+            ),
+          SizedBox(height: 50),
           Text(
             '\$${loadedProduct.price}',
             style: TextStyle(
