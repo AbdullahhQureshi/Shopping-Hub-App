@@ -22,7 +22,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
   var _editedProduct = Product(
     id: null,
     title: '',
-    price: 0,
+    price: '',
     discription: '',
     imageurl: '',
   );
@@ -164,7 +164,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                 onSaved: (value) {
                   _editedProduct = Product(
                       title: _editedProduct.title,
-                      price: double.parse(value),
+                      price: value,
                       discription: _editedProduct.discription,
                       imageurl: _editedProduct.imageurl,
                       id: _editedProduct.id,

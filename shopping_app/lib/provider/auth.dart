@@ -2,11 +2,14 @@ import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:shopping_app/models/http_exception.dart';
+import 'package:shopping_app/screens/order_info.dart';
+import 'package:shopping_app/screens/order_info.dart';
 
 class Auth with ChangeNotifier {
   String _token;
   DateTime _expirydate;
   String _userid;
+
 
   bool get isAuth {
     return _token != null;
@@ -52,5 +55,19 @@ class Auth with ChangeNotifier {
 
   Future<void> login(String email, String password) async {
     return _authenticate(email, password, 'accounts:signInWithPassword');
+  }
+  Future<void> confirmorder(String fullname,String address,String phonenumber) async{
+    final url="https://shpping-app-2be1d-default-rtdb.firebaseio.com/$_userid.json?auth=$_token";
+    try{
+      http.post(url,body: json.encode({
+        'address':address,
+        'fullname':fullname,
+        'phonenumber':phonenumber,
+      }),
+      );
+    }catch(error){
+      print(error);
+      throw(error);
+    }
   }
 }

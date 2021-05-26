@@ -17,6 +17,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _passwordController =TextEditingController();
   final _confirmpasswordController =TextEditingController();
   final _usernameController =TextEditingController();
+  final _addressController =TextEditingController();
   final _phonenumberController =TextEditingController();
   var _formkey = GlobalKey<FormState>();
   RegExp regexp = new RegExp(RegExPattern.emailRegExPattern);
@@ -97,7 +98,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                   child: TextFormField(
-                    controller: _usernameController,
+                    controller: _addressController,
                     keyboardType: TextInputType.streetAddress,
                     // ignore: missing_return
                     validator: (String value) {

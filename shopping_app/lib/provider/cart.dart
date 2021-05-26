@@ -37,7 +37,7 @@ class Cart with ChangeNotifier {
 
   void addItem(
     String productId,
-    double price,
+    String price,
     String title,
       String imageurl,
   ) {
@@ -59,7 +59,7 @@ class Cart with ChangeNotifier {
         () => CartItem(
           id: DateTime.now().toString(),
           title: title,
-          price: price,
+          price: double.parse(price),
           quantity: 1,
         ),
       );

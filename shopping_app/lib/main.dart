@@ -13,10 +13,11 @@ import 'package:shopping_app/screens/cart_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shopping_app/provider/order.dart';
 import 'package:device_preview/device_preview.dart';
+import 'package:shopping_app/screens/order_info.dart';
 
 void main() {
   runApp(
-     MyApp(), // Wrap your app
+    MyApp(), // Wrap your app
   );
 }
 
@@ -37,19 +38,22 @@ class MyApp extends StatelessWidget {
           ),
           ChangeNotifierProvider(
             create: (context) => Orders(),
-          )
+          ),
+
         ],
         child: Consumer<Auth>(
             builder: (ctx, auth, _) => MaterialApp(
-                    home: auth.isAuth ? Allproduct() : WelcomeScreen(),
-                    routes: {
-                      Productdetail.routName: (ctx) => Productdetail(),
-                      CartScreen.routeName: (ctx) => CartScreen(),
-                      OrdersScreen.routeName: (ctx) => OrdersScreen(),
-                      Allproduct.routeName: (ctx) => Allproduct(),
-                      UserProductsScreen.routeName: (ctx) =>
-                          UserProductsScreen(),
-                      EditProductScreen.routeName: (ctx) => EditProductScreen(),
-                    })));
+              debugShowCheckedModeBanner: false,
+                home: auth.isAuth ? Allproduct() : WelcomeScreen(),
+                routes: {
+                  Productdetail.routName: (ctx) => Productdetail(),
+                  CartScreen.routeName: (ctx) => CartScreen(),
+                  OrdersScreen.routeName: (ctx) => OrdersScreen(),
+                  Allproduct.routeName: (ctx) => Allproduct(),
+                  UserProductsScreen.routeName: (ctx) =>
+                      UserProductsScreen(),
+                  OrderInfo.routeName:(ctx)=>OrderInfo(),
+                  EditProductScreen.routeName: (ctx) => EditProductScreen(),
+                })));
   }
 }

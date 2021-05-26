@@ -1,14 +1,18 @@
+import 'dart:async';
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_app/provider/product.dart';
 import 'package:shopping_app/provider/products.dart';
-import 'package:shopping_app/provider/searcheditems.dart';
 import 'package:shopping_app/widget/app_drawer.dart';
 import 'package:shopping_app/widget/badge.dart';
 import 'package:shopping_app/provider/cart.dart';
+import 'package:shopping_app/widget/infodialogue.dart';
 import 'package:shopping_app/widget/product_list.dart';
-import 'package:shopping_app/screens/searchproduct_screen.dart';
 import 'package:speech_recognition/speech_recognition.dart';
+
 
 import 'cart_screen.dart';
 
@@ -25,27 +29,23 @@ class Allproduct extends StatefulWidget {
 }
 
 class _AllproductState extends State<Allproduct> {
-  final TextEditingController __searchcontroller = new TextEditingController();
+  //final TextEditingController __searchcontroller = new TextEditingController();
   var _showOnlyFavorites = false;
   SpeechRecognition _speechRecognition;
   bool _isAvailable = false;
   bool _isListening = false;
+  String resultText = "Search input";
 
-  var _searchedproducts=[{
-    'id':'',
-    'title':'',
-    'description':'',
-    'imageurl':'',
 
-  }];
 
-  String resultText = "Speach input";
 
   @override
   void initState() {
-    super.initState();
     initSpeechRecognizer();
+    super.initState();
+
   }
+
 
   void initSpeechRecognizer() {
     _speechRecognition = SpeechRecognition();
@@ -57,26 +57,73 @@ class _AllproductState extends State<Allproduct> {
     _speechRecognition.setRecognitionStartedHandler(
           () => setState(() => _isListening = true),
     );
+    void onRecognitionResult(String text) {
+      setState(() {
+        resultText = text;
+        // print('Product id is: ${resultText.replaceAll(new RegExp(r"\s+\b|\b\s"), "")}');
+      });
+    }
 
-    _speechRecognition.setRecognitionResultHandler(
-          (String speech) => setState(() => resultText = speech),
-    );
-
-    _speechRecognition.setRecognitionCompleteHandler(
-            () => setState(() => _isListening = false)
-    );
-
-    _speechRecognition.activate().then(
-          (result) => setState(() => _isAvailable = result),
-    );
+    void onRecognitionComplete() {
+      setState(() {
+        _isListening = false;
+     //   _handleSubmitted(resultText);
+      });
+    }
+    _speechRecognition.setRecognitionResultHandler(onRecognitionResult);
+    _speechRecognition.setRecognitionCompleteHandler(onRecognitionComplete);
 
   }
 
+/*
+    _speechRecognition.setRecognitionResultHandler(
+          (String speech) => setState(() => {resultText = speech,
+
+            }),
+    );
+
+    _speechRecognition.setRecognitionCompleteHandler(
+            () {
+                  (String speech) => setState(() => {resultText = speech,
+
+              });
+              print("line 79");
+              print(resultText);
+              setState(() => _isListening = false);
+
+              */
+/* print('-->setRecognitionCompleteHandler<--')
+;              log(resultText);
+                     setState(() {
+                       completeResultText = resultText;
+                       searchkeyword=resultText;
+                     });*//*
+
+
+            }
+    );
+*/
+
+    // _speechRecognition.activate().then(
+    //       (result) => setState(() => _isAvailable = result),
+    // );
+
+
+
+ /* @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    if(_isInit) {
+      Provider.of<Products>(context).FetchandSetProducts(searchkeyword);
+    }
+    _isInit=false;
+    super.didChangeDependencies();
+  }*/
 
   @override
   Widget build(BuildContext context) {
     final _productlist = Provider.of<Products>(context);
-    final _productdata = _productlist.items;
+    //final _productdata = _productlist.items;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.orange,
@@ -116,7 +163,7 @@ class _AllproductState extends State<Allproduct> {
                 Icons.shopping_cart,
               ),
               onPressed: () {
-                Navigator.of(context).pushNamed(CartScreen.routeName);
+                Navigator.of(context).popAndPushNamed(CartScreen.routeName);
               },
             ),
           ),
@@ -126,7 +173,7 @@ class _AllproductState extends State<Allproduct> {
       body: SingleChildScrollView(
         child: Column(children: <Widget>[
           SizedBox(height: 5,),
-          /*Container(
+          Container(
             width: MediaQuery.of(context).size.width *0.9 ,
             height:  MediaQuery.of(context).size.width *0.2,
             decoration: BoxDecoration(
@@ -163,15 +210,10 @@ class _AllproductState extends State<Allproduct> {
                       onPressed: () {
                         setState(() {
                           resultText="";
+                         // completeResultText='';
                         });
 
-                        /* if (_isListening)
-                            _speechRecognition.cancel().then(
-                                  (result) => setState(() {
-                                    _isListening = result;
-                                    resultText = "";
-                                  }),
-                                );*/
+
                       },
                     ),
                 SizedBox(
@@ -185,27 +227,21 @@ class _AllproductState extends State<Allproduct> {
                   ),
                   color: Colors.orange,
                   onPressed: () {
-                    if (_isAvailable && !_isListening)
-                      _speechRecognition
-                          .listen(locale: "en_US");
-                    //.then((result) => resultText=result);
+                    if (  !_isListening)
+                      _speechRecognition.listen(locale: "en_US");//.then((result) => resultText=result);
                   },
                 ),
+
                 SizedBox(width: 5.0,),
+
+
                 FlatButton(
                     onPressed: (){
-                      if(__searchcontroller!=null){
-                        for( int i=0;  i<__searchcontroller.text.length; i++){
-                          if(_productdata[i].title.toLowerCase().contains(__searchcontroller.text.toLowerCase())) {
-                            _searchedproducts[i]['id']=_productdata[i].id;
-                            _searchedproducts[i]['title']=_productdata[i].title;
-                            _searchedproducts[i]['description']=_productdata[i].discription;
-                            _searchedproducts[i]['imageurl']=_productdata[i].imageurl;
-                            print('compared');
-                          }
-                        }
-                      }
-                      print('${_searchedproducts}');
+                      //  Provider.of<Products>(context).FetchandSetProducts(searchkeyword);
+                        Provider.of<Products>(context,listen: false).FetchandSetProducts(resultText);
+                        initDialog();
+
+
                     },
                     padding: EdgeInsets.all(5),
                     child: Text(
@@ -217,13 +253,13 @@ class _AllproductState extends State<Allproduct> {
                 ),
               ],
             ),
-          ),*/
+          ),
 
 
 
 
           Container(
-            height: MediaQuery.of(context).size.height / 2,
+            height: MediaQuery.of(context).size.height,
             padding: EdgeInsets.all(10),
             child: Productlist(),
           ),
@@ -231,6 +267,35 @@ class _AllproductState extends State<Allproduct> {
       ),
     );
   }
+  void initDialog() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) => InfoDialog(),
+    );
 
-}
+    var RequestTimeout = 15;
+    const oneSecondTick = Duration(seconds: 1);
+
+    var timer = Timer.periodic(oneSecondTick, (timer) {
+      RequestTimeout--;
+
+      if (RequestTimeout == 0) {
+        Navigator.pop(context);
+        RequestTimeout = 60;
+
+        timer.cancel();
+      }
+    });
+  }
+
+  /*Future<void> _submit() async{
+
+        await Provider.of<Products>(context,listen: false).FetchandSetProducts(searchkeyword);
+
+  }
+*/
+  }
+
+
 /**/

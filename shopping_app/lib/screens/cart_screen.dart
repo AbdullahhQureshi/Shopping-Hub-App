@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import 'package:shopping_app/provider/cart.dart' show Cart;
 import 'package:shopping_app/provider/order.dart';
+import 'package:shopping_app/screens/order_info.dart';
 import 'package:shopping_app/widget/cart_item.dart';
 
 class CartScreen extends StatelessWidget {
@@ -47,6 +48,7 @@ class CartScreen extends StatelessWidget {
                         cart.totalAmount,
                       );
                       cart.clear();
+                      Navigator.of(context).popAndPushNamed(OrderInfo.routeName);
                     },
                     textColor: Theme.of(context).primaryColor,
                   )

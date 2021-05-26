@@ -5,6 +5,7 @@ import 'package:shopping_app/models/http_exception.dart';
 import 'package:shopping_app/provider/auth.dart';
 import 'package:shopping_app/provider/regex_pattern.dart';
 import 'package:shopping_app/screens/allproduct_screen.dart';
+import 'package:speech_recognition/speech_recognition.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -16,6 +17,63 @@ class _LoginScreenState extends State<LoginScreen> {
   final _passwordController =TextEditingController();
   var _formkey = GlobalKey<FormState>();
   RegExp regexp = new RegExp(RegExPattern.emailRegExPattern);
+
+
+
+
+  SpeechRecognition _speechRecognition;
+  bool _isAvailable = false;
+  bool _isListening = false;
+  String resultText = "Search input";
+
+
+
+
+  @override
+  void initState() {
+    initSpeechRecognizer();
+    super.initState();
+
+  }
+
+
+  void initSpeechRecognizer() {
+    _speechRecognition = SpeechRecognition();
+
+    _speechRecognition.setAvailabilityHandler(
+          (bool result) => setState(() => _isAvailable = result),
+    );
+
+    _speechRecognition.setRecognitionStartedHandler(
+          () => setState(() => _isListening = true),
+    );
+    void onRecognitionResult(String text) {
+      setState(() {
+        resultText = text;
+        // print('Product id is: ${resultText.replaceAll(new RegExp(r"\s+\b|\b\s"), "")}');
+      });
+    }
+
+    void onRecognitionComplete() {
+      setState(() {
+        _isListening = false;
+        //   _handleSubmitted(resultText);
+      });
+    }
+    _speechRecognition.setRecognitionResultHandler(onRecognitionResult);
+    _speechRecognition.setRecognitionCompleteHandler(onRecognitionComplete);
+
+  }
+
+
+
+
+
+
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,6 +129,49 @@ class _LoginScreenState extends State<LoginScreen> {
                     onChanged: (value) {},
                   ),
                 ),
+                
+                
+                
+                
+                Container(
+                  width: MediaQuery.of(context).size.width *0.9 ,
+                  height:  MediaQuery.of(context).size.width *0.2,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(6.0),
+                    border: Border.all(color: Colors.black, width: 0.7),
+                  ),
+                  padding: EdgeInsets.symmetric(
+                    vertical: 8.0,
+                    horizontal: 12.0,
+                  ),
+                  child: Text(
+                   resultText = resultText.replaceAll("\\s+",""),
+                    textAlign:TextAlign.center,
+                    style: TextStyle(fontSize: 24.0),
+                  ),
+                ),
+                
+                
+                
+                
+                
+                
+                //flat button down the Email for Voice input
+                FlatButton(onPressed: () {
+                  if (  !_isListening)
+                    _speechRecognition.listen(locale: "en_US");//.then((result) => resultText=result);
+                },
+                    child: Text("input email",
+                        style: TextStyle(fontSize: 18, color: Colors.white)
+                    ),
+                  color: Colors.orange,
+                ),
+                
+                
+                
+                
+                
+                
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                   child: TextFormField(
@@ -115,7 +216,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-                Padding(
+                /*Padding(
                   padding: EdgeInsets.symmetric(
                     horizontal: 20.0,
                     vertical: 10.0,
@@ -140,7 +241,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ],
                     ),
                   ),
-                ),
+                ),*/
               ],
             ),
           ),
