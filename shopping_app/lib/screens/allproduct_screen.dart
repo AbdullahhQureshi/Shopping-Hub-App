@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -255,14 +253,38 @@ class _AllproductState extends State<Allproduct> {
             ),
           ),
 
-
-
-
           Container(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+
+            child: Text("Categories", textAlign: TextAlign.center,style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),
+            ),
+          ),
+
+
+          ListView(
+            shrinkWrap: true,
+           scrollDirection: Axis.vertical,
+            padding: EdgeInsets.all(3),
+            children: <Widget>[
+              Container(
+               height: MediaQuery.of(context).size.height,
+               width: MediaQuery.of(context).size.width,
+
+                child: Text("Phone", textAlign: TextAlign.center,style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold),
+                ),
+              ),
+            ],
+          ),
+
+
+
+
+          /*Container(
             height: MediaQuery.of(context).size.height,
             padding: EdgeInsets.all(10),
             child: Productlist(),
-          ),
+          ),*/
         ]),
       ),
     );
