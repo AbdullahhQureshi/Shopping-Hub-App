@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:shopping_app/screens/allproduct_screen.dart';
 
 import 'login.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class WelcomeScreen extends StatefulWidget {
+  static const routeName = '/welcome';
   @override
   _WelcomeScreenState createState() => _WelcomeScreenState();
 }
@@ -23,7 +25,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: [Colors.orange, Colors.orangeAccent],
+                  colors: [Colors.teal, Colors.white],
                 ),
               ),
               child: Column(
@@ -33,7 +35,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   Center(
                     child: Text(
                       'Shopping App',
-                      style: TextStyle(fontSize: 40),
+                      style: TextStyle(fontSize: 40,color: Colors.white)
                     ),
                   ),
                   SizedBox(
@@ -60,7 +62,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           EdgeInsets.symmetric(horizontal: 20, vertical: 10.0),
                       child: FlatButton(
                         padding: EdgeInsets.all(15),
-                        color: Colors.orange,
+                        color: Colors.teal,
                         onPressed: () {
                           Navigator.push(
                             context,
@@ -71,7 +73,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         },
                         child: Text(
                           'Log In',
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(color: Colors.white, fontSize: 20.0),
                         ),
                       ),
                     ),
@@ -80,7 +82,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                       child: FlatButton(
                         padding: EdgeInsets.all(15),
-                        color: Colors.orangeAccent,
+                        color: Colors.teal,
                         onPressed: () {
                           Navigator.push(
                             context,
@@ -91,7 +93,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         },
                         child: Text(
                           'Sign Up',
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(color: Colors.white, fontSize: 20.0),
                         ),
                       ),
                     ),

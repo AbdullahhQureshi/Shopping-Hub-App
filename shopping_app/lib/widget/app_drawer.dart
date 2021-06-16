@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:shopping_app/screens/allproduct_screen.dart';
+import 'package:shopping_app/screens/edit_profile.dart';
 
 import 'package:shopping_app/screens/order_screen.dart';
 import 'package:shopping_app/screens/user_screen.dart';
+import 'package:shopping_app/screens/welcome_page.dart';
 
 class AppDrawer extends StatelessWidget {
   @override
@@ -11,16 +13,16 @@ class AppDrawer extends StatelessWidget {
       child: Column(
         children: <Widget>[
           AppBar(
-            backgroundColor: Colors.orange,
+            backgroundColor: Colors.teal,
             title: Text('Menu'),
             automaticallyImplyLeading: false,
           ),
           Divider(),
           ListTile(
-            leading: Icon(Icons.shop),
-            title: Text('Shop'),
+            leading: Icon(Icons.person_rounded),
+            title: Text('Edit Profile'),
             onTap: () {
-              Navigator.of(context).popAndPushNamed(Allproduct.routeName);
+              Navigator.of(context).popAndPushNamed(EditProfile.routeName);
             },
           ),
           Divider(),
@@ -32,15 +34,15 @@ class AppDrawer extends StatelessWidget {
                   .popAndPushNamed(OrdersScreen.routeName);
             },
           ),
-          /*Divider(),
+          Divider(),
           ListTile(
-            leading: Icon(Icons.edit),
-            title: Text('Manage Products'),
+            leading: Icon(Icons.logout),
+            title: Text('Logout'),
             onTap: () {
               Navigator.of(context)
-                  .pushReplacementNamed(UserProductsScreen.routeName);
+                  .pushNamedAndRemoveUntil(WelcomeScreen.routeName,(route)=> false);
             },
-          )*/
+          )
         ],
       ),
     );

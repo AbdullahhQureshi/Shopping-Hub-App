@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:shopping_app/main.dart';
 import 'package:shopping_app/models/http_exception.dart';
 import 'package:shopping_app/provider/auth.dart';
 import 'package:shopping_app/provider/regex_pattern.dart';
 import 'package:shopping_app/screens/allproduct_screen.dart';
+import 'package:shopping_app/widget/progressdialogue.dart';
 import 'package:speech_recognition/speech_recognition.dart';
 
 class LoginScreen extends StatefulWidget {
+  static const routeName = '/login';
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -17,6 +20,8 @@ class _LoginScreenState extends State<LoginScreen> {
   final _passwordController =TextEditingController();
   var _formkey = GlobalKey<FormState>();
   RegExp regexp = new RegExp(RegExPattern.emailRegExPattern);
+  bool email=false;
+  bool password=false;
 
 
 
@@ -24,7 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
   SpeechRecognition _speechRecognition;
   bool _isAvailable = false;
   bool _isListening = false;
-  String resultText = "Search input";
+  //String resultText = "Search input";
 
 
 
@@ -33,7 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     initSpeechRecognizer();
     super.initState();
-
+    // print('looking: $userId');
   }
 
 
@@ -49,14 +54,21 @@ class _LoginScreenState extends State<LoginScreen> {
     );
     void onRecognitionResult(String text) {
       setState(() {
-        resultText = text;
-        // print('Product id is: ${resultText.replaceAll(new RegExp(r"\s+\b|\b\s"), "")}');
-      });
+
+        if(email) {
+          _emailController.text = text.replaceAll(" ", "").replaceAll("atrate", "@");
+
+        }
+        else if(password)
+          _passwordController.text=text.replaceAll(" ", "").replaceAll("space", " ");
+        }
+        );
     }
 
     void onRecognitionComplete() {
       setState(() {
         _isListening = false;
+        print(_passwordController.text);
         //   _handleSubmitted(resultText);
       });
     }
@@ -78,9 +90,9 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.orange,
+        backgroundColor: Colors.teal,
         centerTitle: true,
-        title: Text('Shopping App'),
+        title: Text('Login'),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -91,7 +103,10 @@ class _LoginScreenState extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Padding(
+                SizedBox(
+                  height: 40,
+                ),
+                /*Padding(
                   padding: EdgeInsets.only(bottom: 70.0),
                   child: Center(
                     child: Text(
@@ -99,7 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       style: TextStyle(fontSize: 35.0),
                     ),
                   ),
-                ),
+                ),*/
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                   child: TextFormField(
@@ -129,48 +144,37 @@ class _LoginScreenState extends State<LoginScreen> {
                     onChanged: (value) {},
                   ),
                 ),
-                
-                
-                
-                
-                Container(
-                  width: MediaQuery.of(context).size.width *0.9 ,
-                  height:  MediaQuery.of(context).size.width *0.2,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(6.0),
-                    border: Border.all(color: Colors.black, width: 0.7),
-                  ),
-                  padding: EdgeInsets.symmetric(
-                    vertical: 8.0,
-                    horizontal: 12.0,
-                  ),
-                  child: Text(
-                   resultText = resultText.replaceAll("\\s+",""),
-                    textAlign:TextAlign.center,
-                    style: TextStyle(fontSize: 24.0),
-                  ),
-                ),
-                
-                
-                
-                
-                
-                
+
+                /*SizedBox(
+                  height: ,
+                ),*/
+
                 //flat button down the Email for Voice input
-                FlatButton(onPressed: () {
-                  if (  !_isListening)
-                    _speechRecognition.listen(locale: "en_US");//.then((result) => resultText=result);
-                },
-                    child: Text("input email",
-                        style: TextStyle(fontSize: 18, color: Colors.white)
-                    ),
-                  color: Colors.orange,
+                Padding(
+                  padding: EdgeInsets.only(left: 20.0,right: 20.0),
+                  child: FlatButton(onPressed: () {
+                    password=false;
+                    email=true;
+                    if (  !_isListening) {
+                      _speechRecognition.listen(
+                          locale: "en_US"); //.then((result) => resultText=result);
+                    }
+                    //email=false;
+                  },
+                      child: Text("input email",
+                          style: TextStyle(fontSize: 18, color: Colors.white)
+                      ),
+                    color: Colors.deepOrangeAccent,
+
+                  ),
                 ),
-                
-                
-                
-                
-                
+
+
+
+                SizedBox(
+                  height: 40,
+                ),
+
                 
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
@@ -199,20 +203,49 @@ class _LoginScreenState extends State<LoginScreen> {
                     onChanged: (value) {},
                   ),
                 ),
+
                 SizedBox(
-                  height: 25.0,
+                  height: 10,
                 ),
+
+                Padding(
+                  padding: EdgeInsets.only(left: 20.0,right: 20.0),
+                  child: FlatButton(
+                  onPressed: () {
+                    email=false;
+                    password=true;
+                    if (  !_isListening) {
+                      _speechRecognition.listen(
+                          locale: "en_US"); //.then((result) => resultText=result);
+                    }
+
+                   // password=false;
+                  },
+                  child: Text("input password",
+                      style: TextStyle(fontSize: 18, color: Colors.white)
+                  ),
+                  color: Colors.deepOrangeAccent,
+                ),
+                ),
+
+
+                SizedBox(
+                  height: 40.0,
+                ),
+
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                   child: FlatButton(
                     padding: EdgeInsets.all(15),
-                    color: Colors.orange,
+                    color: Colors.deepOrangeAccent,
                     onPressed: () {
+
                       _submit();
+                      showDialog(context: context,barrierDismissible: false,builder: (context)=>ProgressDialog(status: 'Loading...'),);
                     },
                     child: Text(
                       'Login',
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: Colors.white, fontSize: 20.0),
                     ),
                   ),
                 ),
@@ -263,10 +296,16 @@ class _LoginScreenState extends State<LoginScreen> {
 
   }
   Future<void> _submit() async{
+
+
     try{
       if(_formkey.currentState.validate()){
         await Provider.of<Auth>(context,listen: false).login(_emailController.text,_passwordController.text);
-        Navigator.popAndPushNamed(context, Allproduct.routeName);
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          Allproduct.routeName,
+            (route)=>false,
+        );
       }
     } on HttpException catch(error){
       var errorMsg='Authentication Failed';

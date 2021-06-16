@@ -1,9 +1,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
+import 'package:shopping_app/main.dart';
 import 'dart:convert';
 import 'package:shopping_app/models/http_exception.dart';
-import 'package:shopping_app/screens/order_info.dart';
-import 'package:shopping_app/screens/order_info.dart';
 
 class Auth with ChangeNotifier {
   String _token;
@@ -36,11 +35,13 @@ class Auth with ChangeNotifier {
             'returnSecureToken': true
           }));
       final responsedata = json.decode(response.body);
+      print(responsedata);
       if (responsedata['error'] != null) {
         throw HttpException(responsedata['error']['message']);
       }
       _token = responsedata['idToken'];
       _userid = responsedata['localId'];
+      // print(userId);
       _expirydate = DateTime.now()
           .add(Duration(seconds: int.parse(responsedata['expiresIn'])));
       notifyListeners();
@@ -56,12 +57,12 @@ class Auth with ChangeNotifier {
   Future<void> login(String email, String password) async {
     return _authenticate(email, password, 'accounts:signInWithPassword');
   }
-  Future<void> confirmorder(String fullname,String address,String phonenumber) async{
+  Future<void> Upload_data(String username,String address,String phonenumber) async{
     final url="https://shpping-app-2be1d-default-rtdb.firebaseio.com/$_userid.json?auth=$_token";
     try{
       http.post(url,body: json.encode({
         'address':address,
-        'fullname':fullname,
+        'username':username,
         'phonenumber':phonenumber,
       }),
       );
@@ -70,4 +71,44 @@ class Auth with ChangeNotifier {
       throw(error);
     }
   }
+  Future<void> update(String username,String address,String phonenumber) async{
+    final url="https://shpping-app-2be1d-default-rtdb.firebaseio.com/$_userid.json?auth=$_token";
+    try{
+      http.put(url,body: json.encode({
+        'address':address,
+        'username':username,
+        'phonenumber':phonenumber,
+      }),
+      );
+    }catch(error){
+      print(error);
+      throw(error);
+    }
+  }
+  Future<void> uploadJazzcashNumber(String phonenumber) async{
+    final url="https://shpping-app-2be1d-default-rtdb.firebaseio.com/$_userid.json?auth=$_token";
+    try{
+      http.post(url,body: json.encode({
+        'jazzcashNumber':phonenumber,
+      }),
+      );
+    }catch(error){
+      print(error);
+      throw(error);
+    }
+  }
+
+  Future<Map> fetchJazzcashNumber() async{
+    final url="https://shpping-app-2be1d-default-rtdb.firebaseio.com/$_userid.json?auth=$_token";
+    try{
+      var response = await http.get(url);
+      return (json.decode(response.body));
+    }catch(error){
+      print(error);
+      throw(error);
+    }
+  }
+
+
+
 }

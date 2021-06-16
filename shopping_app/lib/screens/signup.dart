@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:shopping_app/provider/auth.dart';
 import 'package:shopping_app/models/http_exception.dart';
 import 'package:shopping_app/screens/allproduct_screen.dart';
+import 'package:speech_recognition/speech_recognition.dart';
 
 class SignUpScreen extends StatefulWidget  {
   @override
@@ -21,13 +22,87 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _phonenumberController =TextEditingController();
   var _formkey = GlobalKey<FormState>();
   RegExp regexp = new RegExp(RegExPattern.emailRegExPattern);
+  bool email=false;
+  bool password=false;
+  bool phonenumber=false;
+  bool address = false;
+  bool username =false;
+  bool repassword =false;
+
+
+
+
+  SpeechRecognition _speechRecognition;
+  bool _isAvailable = false;
+  bool _isListening = false;
+  //String resultText = "Search input";
+
+
+
+
+  @override
+  void initState() {
+    initSpeechRecognizer();
+    super.initState();
+
+  }
+
+
+  void initSpeechRecognizer() {
+    _speechRecognition = SpeechRecognition();
+
+    _speechRecognition.setAvailabilityHandler(
+          (bool result) => setState(() => _isAvailable = result),
+    );
+
+    _speechRecognition.setRecognitionStartedHandler(
+          () => setState(() => _isListening = true),
+    );
+    void onRecognitionResult(String text) {
+      setState(() {
+
+        if(email) {
+          _emailController.text = text;
+
+        }
+        else if(password) {
+          _passwordController.text=text;
+        }
+        else if(address) {
+          _addressController.text=text;
+        }
+        else if(username) {
+          _usernameController.text=text;
+        }
+        else if(phonenumber) {
+          _phonenumberController.text=text;
+        }
+      }
+      );
+    }
+
+    void onRecognitionComplete() {
+      setState(() {
+        _isListening = false;
+       // print(_passwordController.text);
+        //   _handleSubmitted(resultText);
+      });
+    }
+    _speechRecognition.setRecognitionResultHandler(onRecognitionResult);
+    _speechRecognition.setRecognitionCompleteHandler(onRecognitionComplete);
+
+  }
+
+
+
+
   @override
    Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.orange,
+        backgroundColor: Colors.teal,
         centerTitle: true,
-        title: Text('Shopping App'),
+        title: Text('Sign Up'),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -38,17 +113,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Padding(
-                    padding: EdgeInsets.only(bottom: 70.0),
-                    child: Center(
-                      child: Text(
-                        'Sign Up',
-                        style: TextStyle(fontSize: 35.0),
-                      ),
-                    ),
-                  ),
-
-
+                SizedBox(
+                  height: 40,
+                ),
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                   child: TextFormField(
@@ -72,6 +139,36 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     // onChanged: (value) {},
                   ),
                 ),
+                Padding(
+                  padding: EdgeInsets.only(left: 20.0,right: 20.0),
+                  child: FlatButton(
+                    onPressed: () {
+                      email=false;
+                      password=false;
+                      address=false;
+                      phonenumber=false;
+                      username=true;
+                      repassword =false;
+                      if (  !_isListening) {
+                        _speechRecognition.listen(
+                            locale: "en_US"); //.then((result) => resultText=result);
+                      }
+                      // password=false;
+                    },
+                    child: Text("input Username",
+                        style: TextStyle(fontSize: 18, color: Colors.white)
+                    ),
+                    color: Colors.deepOrangeAccent,
+                  ),
+                ),
+
+
+
+
+
+
+
+
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                   child: TextFormField(
@@ -95,6 +192,37 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     // onChanged: (value) {},
                   ),
                 ),
+                Padding(
+                  padding: EdgeInsets.only(left: 20.0,right: 20.0),
+                  child: FlatButton(
+                    onPressed: () {
+                      email=false;
+                      username=false;
+                      password=false;
+                      address=false;
+                      phonenumber=true;
+                      repassword =false;
+                      if (  !_isListening) {
+                        _speechRecognition.listen(
+                            locale: "en_US"); //.then((result) => resultText=result);
+                      }
+                      // password=false;
+                    },
+                    child: Text("Enter Contact",
+                        style: TextStyle(fontSize: 18, color: Colors.white)
+                    ),
+                    color: Colors.deepOrangeAccent,
+                  ),
+                ),
+
+
+
+
+
+
+
+
+
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                   child: TextFormField(
@@ -118,6 +246,37 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     // onChanged: (value) {},
                   ),
                 ),
+                Padding(
+                  padding: EdgeInsets.only(left: 20.0,right: 20.0),
+                  child: FlatButton(
+                    onPressed: () {
+                      email=false;
+                      password=false;
+                      address=true;
+                      phonenumber=false;
+                      username=false;
+                      repassword =false;
+                      if (  !_isListening) {
+                        _speechRecognition.listen(
+                            locale: "en_US"); //.then((result) => resultText=result);
+                      }
+                      // password=false;
+                    },
+                    child: Text("Enter address",
+                        style: TextStyle(fontSize: 18, color: Colors.white)
+                    ),
+                    color: Colors.deepOrangeAccent,
+                  ),
+                ),
+
+
+
+
+
+
+
+
+
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                     child: TextFormField(
@@ -128,7 +287,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         if (value.isEmpty) {
                           return 'Enter the Email';
                         }
-
 
                         if (!regexp.hasMatch(value)) {
                           return 'Email format incorrect';
@@ -145,7 +303,34 @@ class _SignUpScreenState extends State<SignUpScreen> {
                      // onChanged: (value) {},
                     ),
                   ),
+                Padding(
+                  padding: EdgeInsets.only(left: 20.0,right: 20.0),
+                  child: FlatButton(onPressed: () {
+                    email=true;
+                    password=false;
+                    address=false;
+                    phonenumber=false;
+                    username=false;
+                    repassword =false;
+                    if (  !_isListening) {
+                      _speechRecognition.listen(
+                          locale: "en_US"); //.then((result) => resultText=result);
+                    }
+                    //email=false;
+                  },
+                    child: Text("input email",
+                        style: TextStyle(fontSize: 18, color: Colors.white)
+                    ),
+                    color: Colors.deepOrangeAccent,
 
+                  ),
+                ),
+
+
+
+
+
+//password
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                   child: TextFormField(
@@ -161,6 +346,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         return 'Password length should be atleast 6 Character';
                       }
                     },
+
                     obscureText: true,
                     decoration: InputDecoration(
                       icon: Icon(FontAwesomeIcons.key),
@@ -173,6 +359,36 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     //onChanged: (value) {},
                   ),
                 ),
+//voice input password
+                Padding(
+                  padding: EdgeInsets.only(left: 20.0,right: 20.0),
+                  child: FlatButton(
+                    onPressed: () {
+                      email=false;
+                      password=false;
+                      address=false;
+                      phonenumber=true;
+                      username=false;
+                      repassword =false;
+                      if (  !_isListening) {
+                        _speechRecognition.listen(
+                            locale: "en_US"); //.then((result) => resultText=result);
+                      }
+                      // password=false;
+                    },
+                    child: Text("Enter password",
+                        style: TextStyle(fontSize: 18, color: Colors.white)
+                    ),
+                    color: Colors.deepOrangeAccent,
+                  ),
+                ),
+
+
+
+
+
+
+//ReEnter password
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                   child: TextFormField(
@@ -203,6 +419,39 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     //onChanged: (value) {},
                   ),
                 ),
+                //voice input
+                Padding(
+                  padding: EdgeInsets.only(left: 20.0,right: 20.0),
+                  child: FlatButton(
+                    onPressed: () {
+                      email=false;
+                      password=false;
+                      address=false;
+                      phonenumber=false;
+                      username=false;
+                      repassword =true;
+                      if (  !_isListening) {
+                        _speechRecognition.listen(
+                            locale: "en_US"); //.then((result) => resultText=result);
+                      }
+
+                      // password=false;
+                    },
+                    child: Text("input password",
+                        style: TextStyle(fontSize: 18, color: Colors.white)
+                    ),
+                    color: Colors.deepOrangeAccent,
+                  ),
+                ),
+
+
+
+
+
+
+
+
+
                 SizedBox(
                   height: 25.0,
                 ),
@@ -210,43 +459,49 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                   child: FlatButton(
                     padding: EdgeInsets.all(15),
-                    color: Colors.orange,
+                    color: Colors.deepOrangeAccent,
                     onPressed: ()  {
                       _submit();
                     },
                     child: Text(
                       'Register',
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: Colors.white, fontSize: 18.0),
                     ),
                   ),
                 ),
-               /* Center(child: Text('or')),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 20.0,
-                    vertical: 10.0,
-                  ),
-                  child: FlatButton(
-                    padding: EdgeInsets.all(11),
-                    color: Colors.red,
-                    onPressed: () {},
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: 15.0,
-                        ),
-                        Icon(FontAwesomeIcons.google, color: Colors.white),
-                        SizedBox(
-                          width: 55.0,
-                        ),
-                        Text(
-                          'Sign Up with Google',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),*/
+
+
+
+
+               // Center(child: Text('or')),
+               //  Padding(
+               //    padding: EdgeInsets.symmetric(
+               //      horizontal: 20.0,
+               //      vertical: 10.0,
+               //    ),
+               //    child: FlatButton(
+               //      padding: EdgeInsets.all(11),
+               //      color: Colors.red,
+               //      onPressed: () {
+               //        Authentication.signInWithGoogle(context: context);
+               //      },
+               //      child: Row(
+               //        children: [
+               //          SizedBox(
+               //            width: 15.0,
+               //          ),
+               //          Icon(FontAwesomeIcons.google, color: Colors.white),
+               //          SizedBox(
+               //            width: 55.0,
+               //          ),
+               //          Text(
+               //            'Sign Up with Google',
+               //            style: TextStyle(color: Colors.white),
+               //          ),
+               //        ],
+               //      ),
+               //    ),
+               //  ),
               ],
             ),
           ),
@@ -272,6 +527,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     try{
       if(_formkey.currentState.validate()){
         await Provider.of<Auth>(context,listen: false).signup(_emailController.text,_passwordController.text);
+        await Provider.of<Auth>(context,listen: false).Upload_data(_usernameController.text, _addressController.text, _phonenumberController.text);
         Navigator.popAndPushNamed(context, Allproduct.routeName);
       }
     } on HttpException catch(error){

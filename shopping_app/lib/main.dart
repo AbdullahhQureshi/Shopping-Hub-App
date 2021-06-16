@@ -4,7 +4,10 @@ import 'package:shopping_app/provider/products.dart';
 import 'package:shopping_app/provider/cart.dart';
 import 'package:shopping_app/screens/allproduct_screen.dart';
 import 'package:shopping_app/screens/edit_product_screen.dart';
+import 'package:shopping_app/screens/edit_profile.dart';
 import 'package:shopping_app/screens/order_screen.dart';
+import 'package:shopping_app/screens/payment/payment_method.dart';
+import 'package:shopping_app/screens/product_screen.dart';
 import 'package:shopping_app/screens/productdetail_screen.dart';
 import 'package:shopping_app/screens/user_screen.dart';
 import 'package:shopping_app/screens/welcome_page.dart';
@@ -13,9 +16,17 @@ import 'package:shopping_app/screens/cart_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shopping_app/provider/order.dart';
 import 'package:device_preview/device_preview.dart';
-import 'package:shopping_app/screens/order_info.dart';
+import 'package:shopping_app/screens/payment/payment_screen.dart';
+import 'package:shopping_app/screens/sub_categories/phone.dart';
+import 'package:shopping_app/screens/sub_categories/bags.dart';
+import 'package:shopping_app/screens/sub_categories/watch.dart';
+import 'package:shopping_app/screens/sub_categories/shoe.dart';
+import 'package:shopping_app/screens/sub_categories/laptop.dart';
+
+String userId;
 
 void main() {
+
   runApp(
     MyApp(), // Wrap your app
   );
@@ -44,7 +55,7 @@ class MyApp extends StatelessWidget {
         child: Consumer<Auth>(
             builder: (ctx, auth, _) => MaterialApp(
               debugShowCheckedModeBanner: false,
-                home: auth.isAuth ? Allproduct() : WelcomeScreen(),
+                initialRoute: userId != null ? Allproduct.routeName : WelcomeScreen.routeName,
                 routes: {
                   Productdetail.routName: (ctx) => Productdetail(),
                   CartScreen.routeName: (ctx) => CartScreen(),
@@ -52,8 +63,18 @@ class MyApp extends StatelessWidget {
                   Allproduct.routeName: (ctx) => Allproduct(),
                   UserProductsScreen.routeName: (ctx) =>
                       UserProductsScreen(),
-                  OrderInfo.routeName:(ctx)=>OrderInfo(),
                   EditProductScreen.routeName: (ctx) => EditProductScreen(),
+                  PaymentScreen.routeName: (ctx)=>PaymentScreen(),
+                  ProductScreen.routeName: (ctx)=>ProductScreen(),
+                  EditProfile.routeName: (ctx)=>EditProfile(),
+                  WelcomeScreen.routeName: (ctx)=>WelcomeScreen(),
+                  Phone.routename: (ctx)=>Phone(),
+                  Bag.routename: (ctx)=>Bag(),
+                  Watch.routename:(ctx)=>Watch(),
+                  Shoe.routename:(ctx)=>Shoe(),
+                  Laptop.routename:(ctx)=>Laptop(),
+                  PaymentMethod.routeName:(ctx)=>PaymentMethod(),
                 })));
   }
 }
+

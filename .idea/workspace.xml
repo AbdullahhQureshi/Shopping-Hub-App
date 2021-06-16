@@ -20,14 +20,40 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="39d8fa67-a531-4792-9454-ac47c91c9376" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/shopping_app/lib/screens/edit_profile.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shopping_app/lib/screens/payment/payment_method.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shopping_app/lib/screens/payment/payment_screen.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shopping_app/lib/screens/product_screen.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shopping_app/lib/screens/sub_categories/bags.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shopping_app/lib/screens/sub_categories/laptop.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shopping_app/lib/screens/sub_categories/phone.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shopping_app/lib/screens/sub_categories/shoe.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shopping_app/lib/screens/sub_categories/watch.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shopping_app/lib/widget/successdialog.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shopping_app/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/shopping_app/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shopping_app/lib/provider/auth.dart" beforeDir="false" afterPath="$PROJECT_DIR$/shopping_app/lib/provider/auth.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shopping_app/lib/screens/allproduct_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/shopping_app/lib/screens/allproduct_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shopping_app/lib/screens/cart_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/shopping_app/lib/screens/cart_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shopping_app/lib/screens/edit_product_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/shopping_app/lib/screens/edit_product_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shopping_app/lib/screens/login.dart" beforeDir="false" afterPath="$PROJECT_DIR$/shopping_app/lib/screens/login.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shopping_app/lib/screens/order_info.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shopping_app/lib/screens/order_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/shopping_app/lib/screens/order_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shopping_app/lib/screens/productdetail_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/shopping_app/lib/screens/productdetail_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shopping_app/lib/screens/searchproduct_screen.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shopping_app/lib/screens/signup.dart" beforeDir="false" afterPath="$PROJECT_DIR$/shopping_app/lib/screens/signup.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shopping_app/lib/screens/welcome_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/shopping_app/lib/screens/welcome_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shopping_app/lib/widget/app_drawer.dart" beforeDir="false" afterPath="$PROJECT_DIR$/shopping_app/lib/widget/app_drawer.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shopping_app/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/shopping_app/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shopping_app/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/shopping_app/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[Pixel_4_XL_API_30]" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -53,8 +79,13 @@
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
     <property name="last_opened_file_path" value="$USER_HOME$/Downloads/flutter_base" />
-    <property name="settings.editor.selected.configurable" value="preferences.language.Kotlin" />
+    <property name="settings.editor.selected.configurable" value="flutter.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Aqib\Documents\GitHub\Shopping-Hub-App\shopping_app\lib\screens\payment" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="main" type="FlutterRunConfigurationType" factoryName="Flutter">
@@ -91,37 +122,45 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="110" y="120" width="1146" height="488" key="AVDManager" timestamp="1622279255769">
+    <state x="413" y="111" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1623797220537">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="110" y="120" width="1146" height="488" key="AVDManager/0.0.1366.728@0.0.1366.728" timestamp="1622279255769" />
-    <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1622275252590">
+    <state x="413" y="111" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1623797220537" />
+    <state x="110" y="120" width="1146" height="488" key="AVDManager" timestamp="1623838537004">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1622275252590" />
-    <state width="1306" height="87" key="GridCell.Tab.0.bottom" timestamp="1622042411197">
+    <state x="110" y="120" width="1146" height="488" key="AVDManager/0.0.1366.728@0.0.1366.728" timestamp="1623838537004" />
+    <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1623695040491">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1306" height="87" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1622042411197" />
-    <state width="1306" height="87" key="GridCell.Tab.0.center" timestamp="1622042411197">
+    <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1623695040491" />
+    <state width="1323" height="169" key="GridCell.Tab.0.bottom" timestamp="1623832287611">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1306" height="87" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1622042411197" />
-    <state width="1306" height="87" key="GridCell.Tab.0.left" timestamp="1622042411197">
+    <state width="1323" height="169" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1623832287611" />
+    <state width="1323" height="169" key="GridCell.Tab.0.center" timestamp="1623832287611">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1306" height="87" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1622042411197" />
-    <state width="1306" height="87" key="GridCell.Tab.0.right" timestamp="1622042411197">
+    <state width="1323" height="169" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1623832287611" />
+    <state width="1323" height="169" key="GridCell.Tab.0.left" timestamp="1623832287611">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1306" height="87" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1622042411197" />
+    <state width="1323" height="169" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1623832287611" />
+    <state width="1323" height="169" key="GridCell.Tab.0.right" timestamp="1623832287611">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="169" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1623832287611" />
     <state x="263" y="107" key="IDE.errors.dialog" timestamp="1619208409152">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="263" y="107" key="IDE.errors.dialog/0.0.1366.728@0.0.1366.728" timestamp="1619208409152" />
-    <state x="184" y="9" key="SettingsEditor" timestamp="1617126356989">
+    <state x="184" y="9" key="SettingsEditor" timestamp="1623165795923">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1617126356989" />
+    <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1623165795923" />
+    <state x="492" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1623800463445">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="492" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1623800463445" />
   </component>
 </project>

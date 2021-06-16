@@ -3,8 +3,9 @@ import 'package:provider/provider.dart';
 
 import 'package:shopping_app/provider/cart.dart' show Cart;
 import 'package:shopping_app/provider/order.dart';
-import 'package:shopping_app/screens/order_info.dart';
+import 'package:shopping_app/screens/payment/payment_screen.dart';
 import 'package:shopping_app/widget/cart_item.dart';
+import 'package:shopping_app/screens/payment/payment_method.dart';
 
 class CartScreen extends StatelessWidget {
   static const routeName = '/cart';
@@ -14,8 +15,11 @@ class CartScreen extends StatelessWidget {
     final cart = Provider.of<Cart>(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.orange,
+        backgroundColor: Colors.teal,
         title: Text('Your Cart'),
+        actions: [
+          IconButton(icon: Icon(Icons.delete), onPressed: ()=>cart.clear())
+        ],
       ),
       body: Column(
         children: <Widget>[
@@ -47,8 +51,8 @@ class CartScreen extends StatelessWidget {
                         cart.items.values.toList(),
                         cart.totalAmount,
                       );
-                      cart.clear();
-                      Navigator.of(context).popAndPushNamed(OrderInfo.routeName);
+                      //cart.clear();
+                      Navigator.of(context).pushNamed(PaymentMethod.routeName);
                     },
                     textColor: Theme.of(context).primaryColor,
                   )
