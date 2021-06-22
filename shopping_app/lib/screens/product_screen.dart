@@ -12,6 +12,7 @@ import 'cart_screen.dart';
 
 class ProductScreen extends StatefulWidget {
   static const routeName = '/productscreen';
+  String result;
 
   @override
   _ProductScreenState createState() => _ProductScreenState();

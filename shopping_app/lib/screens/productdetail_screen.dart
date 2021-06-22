@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shopping_app/provider/cart.dart';
 //import 'package:shopping_app/provider/product.dart';
 import 'package:shopping_app/provider/products.dart';
+import 'package:shopping_app/screens/cart_screen.dart';
+import 'package:shopping_app/widget/badge.dart';
 
 class Productdetail extends StatelessWidget {
   static const routName = '/product_detail';
@@ -18,6 +21,22 @@ class Productdetail extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.teal,
         title: Text(loadedProduct.title),
+        actions: [
+          Consumer<Cart>(
+            builder: (_, cart, ch) => Badge(
+              child: ch,
+              value: cart.itemCount.toString(),
+            ),
+            child: IconButton(
+              icon: Icon(
+                Icons.shopping_cart,
+              ),
+              onPressed: () {
+                Navigator.of(context).pushNamed(CartScreen.routeName);
+              },
+            ),
+          ),
+        ],
       ),
       body: Column(
         children: <Widget>[

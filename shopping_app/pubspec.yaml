@@ -28,7 +28,6 @@ dependencies:
   intl: ^0.16.1
   consumer: ^2.0.0
   http: ^0.12.2
-  device_preview: ^0.5.5
   speech_recognition: ^0.3.0+1
   permission: ^0.1.7
   crypto: ^2.1.5

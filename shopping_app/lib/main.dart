@@ -15,7 +15,7 @@ import 'package:provider/provider.dart';
 import 'package:shopping_app/screens/cart_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shopping_app/provider/order.dart';
-import 'package:device_preview/device_preview.dart';
+// import 'package:device_preview/device_preview.dart';
 import 'package:shopping_app/screens/payment/payment_screen.dart';
 import 'package:shopping_app/screens/sub_categories/phone.dart';
 import 'package:shopping_app/screens/sub_categories/bags.dart';

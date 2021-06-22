@@ -62,11 +62,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
       setState(() {
 
         if(email) {
-          _emailController.text = text;
+          _emailController.text = text.replaceAll(" ", "").replaceAll("atrate", "@").replaceAll('attherate', '@').replaceAll('one', '1').replaceAll('two', '2').replaceAll('three', '3').replaceAll('four', '4').replaceAll('for', '4').replaceAll('five', '5').replaceAll('six', '6').replaceAll('sex', '6').replaceAll('seven', '7');
 
         }
         else if(password) {
-          _passwordController.text=text;
+          _passwordController.text=text.replaceAll(" ", "").replaceAll("space", " ");
         }
         else if(address) {
           _addressController.text=text;

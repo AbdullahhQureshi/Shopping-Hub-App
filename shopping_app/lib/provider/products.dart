@@ -43,6 +43,7 @@ class Products with ChangeNotifier {
      // final response2 =await http.get(url2,headers: {"x-rapidapi-key": "8f7dd0349amshde6d6bb3893598cp14ee64jsn6b103731d8e7"});
      // print(json.decode(response2.body));     // print('another data: ${(Map<dynamic, dynamic>.from(json.decode(response2.body)))}');
       var ectractdata = (Map<dynamic, dynamic>.from(json.decode(response.body)));
+      print(ectractdata);
       final List<Product> LoadedProducts =[];
       List data = (ectractdata['docs']);
       data.forEach((element) {
