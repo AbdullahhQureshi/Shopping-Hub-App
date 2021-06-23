@@ -8,17 +8,23 @@ class Productlist extends StatelessWidget {
   Widget build(BuildContext context) {
     final productsData = Provider.of<Products>(context);
     final products = productsData.items;
-    return ListView.builder(
-        scrollDirection: Axis.vertical,
-        itemCount: products.length,
-        padding: EdgeInsets.all(10),
-        itemBuilder: (ctx, i) => ChangeNotifierProvider.value(
-            value: products[i],
-            child: Productitem(
-                /*products[i].id, products[i].title,
+    return products.length == 0
+        ? Center(
+            child: CircularProgressIndicator(
+              backgroundColor: Colors.lightBlueAccent,
+            ),
+          )
+        : ListView.builder(
+            scrollDirection: Axis.vertical,
+            itemCount: products.length,
+            padding: EdgeInsets.all(10),
+            itemBuilder: (ctx, i) => ChangeNotifierProvider.value(
+                value: products[i],
+                child: Productitem(
+                    /*products[i].id, products[i].title,
                    products[i].discription,
                    products[i].imageurl,
                    products[i].price)*/
-                )));
+                    )));
   }
 }

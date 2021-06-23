@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shopping_app/screens/allproduct_screen.dart';
 import 'package:shopping_app/screens/edit_profile.dart';
 
 import 'package:shopping_app/screens/order_screen.dart';
 import 'package:shopping_app/screens/user_screen.dart';
 import 'package:shopping_app/screens/welcome_page.dart';
+
+import '../provider/auth.dart';
 
 class AppDrawer extends StatelessWidget {
   @override
@@ -30,17 +33,17 @@ class AppDrawer extends StatelessWidget {
             leading: Icon(Icons.payment),
             title: Text('Orders'),
             onTap: () {
-              Navigator.of(context)
-                  .popAndPushNamed(OrdersScreen.routeName);
+              Navigator.of(context).popAndPushNamed(OrdersScreen.routeName);
             },
           ),
           Divider(),
           ListTile(
             leading: Icon(Icons.logout),
             title: Text('Logout'),
-            onTap: () {
-              Navigator.of(context)
-                  .pushNamedAndRemoveUntil(WelcomeScreen.routeName,(route)=> false);
+            onTap: () async{
+              await Provider.of<Auth>(context, listen: false).logout();
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                  WelcomeScreen.routeName, (route) => false);
             },
           )
         ],

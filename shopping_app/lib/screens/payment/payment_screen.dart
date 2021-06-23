@@ -90,6 +90,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 padding: EdgeInsets.all(15),
                 color: Colors.deepOrangeAccent,
                 onPressed: () async {
+                  print(amount);
+                  if (int.parse(amount) < 100) {
+                    amount = (int.parse(amount) + 100).toString();
+                  }
                   showDialog(
                     context: context,
                     barrierDismissible: false,
@@ -109,7 +113,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   showDialog(
                     context: context,
                     barrierDismissible: true,
-                    builder: (context) => SuccessDialog(text: message,status: response['pp_ResponseCode']),
+                    builder: (context) => SuccessDialog(
+                        text: message, status: response['pp_ResponseCode']),
                   );
                   print(amount);
                 },
@@ -139,7 +144,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
     String pp_BankID = '';
     String pp_ProductID = '';
     String pp_TxnRefNo = tre;
-    String pp_Amount = amount;
+    String pp_Amount = '157';
     String pp_TxnCurrency = 'PKR';
 
     String pp_TxnDateTime =

@@ -13,6 +13,10 @@ class Auth with ChangeNotifier {
   String _userid;
   Timer _authTimer;
 
+  void setToken() {
+    _token = null;
+    notifyListeners();
+  }
 
   bool get isAuth {
     return _token != null;
@@ -71,14 +75,13 @@ class Auth with ChangeNotifier {
     return _authenticate(email, password, 'accounts:signInWithPassword');
   }
 
-
-
   Future<bool> tryAutoLogin() async {
     final prefs = await SharedPreferences.getInstance();
     if (!prefs.containsKey('userData')) {
       return false;
     }
-    final extractedUserData = json.decode(prefs.getString('userData')) as Map<String, Object>;
+    final extractedUserData =
+        json.decode(prefs.getString('userData')) as Map<String, Object>;
     final expiryDate = DateTime.parse(extractedUserData['expiryDate']);
 
     if (expiryDate.isBefore(DateTime.now())) {
@@ -91,8 +94,6 @@ class Auth with ChangeNotifier {
     // _autoLogout();
     return true;
   }
-
-
 
   Future<void> logout() async {
     _token = null;
@@ -109,59 +110,69 @@ class Auth with ChangeNotifier {
     prefs.clear();
   }
 
-
-  Future<void> Upload_data(String username,String address,String phonenumber) async{
-    final url="https://shpping-app-2be1d-default-rtdb.firebaseio.com/$_userid.json?auth=$_token";
-    try{
-      http.post(url,body: json.encode({
-        'address':address,
-        'username':username,
-        'phonenumber':phonenumber,
-      }),
+  Future<void> Upload_data(
+      String username, String address, String phonenumber) async {
+    final url =
+        "https://shpping-app-2be1d-default-rtdb.firebaseio.com/$_userid.json?auth=$_token";
+    try {
+      http.post(
+        url,
+        body: json.encode({
+          'address': address,
+          'username': username,
+          'phonenumber': phonenumber,
+        }),
       );
-    }catch(error){
+    } catch (error) {
       print(error);
-      throw(error);
-    }
-  }
-  Future<void> update(String username,String address,String phonenumber) async{
-    final url="https://shpping-app-2be1d-default-rtdb.firebaseio.com/$_userid.json?auth=$_token";
-    try{
-      http.put(url,body: json.encode({
-        'address':address,
-        'username':username,
-        'phonenumber':phonenumber,
-      }),
-      );
-    }catch(error){
-      print(error);
-      throw(error);
-    }
-  }
-  Future<void> uploadJazzcashNumber(String phonenumber) async{
-    final url="https://shpping-app-2be1d-default-rtdb.firebaseio.com/$_userid.json?auth=$_token";
-    try{
-      http.post(url,body: json.encode({
-        'jazzcashNumber':phonenumber,
-      }),
-      );
-    }catch(error){
-      print(error);
-      throw(error);
+      throw (error);
     }
   }
 
-  Future<Map> fetchJazzcashNumber() async{
-    final url="https://shpping-app-2be1d-default-rtdb.firebaseio.com/$_userid.json?auth=$_token";
-    try{
+  Future<void> update(
+      String username, String address, String phonenumber) async {
+    final url =
+        "https://shpping-app-2be1d-default-rtdb.firebaseio.com/$_userid.json?auth=$_token";
+    try {
+      http.put(
+        url,
+        body: json.encode({
+          'address': address,
+          'username': username,
+          'phonenumber': phonenumber,
+        }),
+      );
+    } catch (error) {
+      print(error);
+      throw (error);
+    }
+  }
+
+  Future<void> uploadJazzcashNumber(String phonenumber) async {
+    final url =
+        "https://shpping-app-2be1d-default-rtdb.firebaseio.com/$_userid.json?auth=$_token";
+    try {
+      http.post(
+        url,
+        body: json.encode({
+          'jazzcashNumber': phonenumber,
+        }),
+      );
+    } catch (error) {
+      print(error);
+      throw (error);
+    }
+  }
+
+  Future<Map> fetchJazzcashNumber() async {
+    final url =
+        "https://shpping-app-2be1d-default-rtdb.firebaseio.com/$_userid.json?auth=$_token";
+    try {
       var response = await http.get(url);
       return (json.decode(response.body));
-    }catch(error){
+    } catch (error) {
       print(error);
-      throw(error);
+      throw (error);
     }
   }
-
-
-
 }

@@ -53,6 +53,7 @@ class MyApp extends StatelessWidget {
         ],
         child: Consumer<Auth>(
             builder: (ctx, auth, _) => MaterialApp(
+              
                     debugShowCheckedModeBanner: false,
                 home: auth.isAuth
                     ? Allproduct()
