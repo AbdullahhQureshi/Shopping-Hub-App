@@ -1,6 +1,7 @@
 import 'package:intl/intl.dart';
 import 'package:shopping_app/screens/allproduct_screen.dart';
 
+import '../main.dart';
 import 'login.dart';
 import 'signup.dart';
 import 'package:flutter/material.dart';
@@ -33,10 +34,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Center(
-                    child: Text(
-                      'Shopping App',
-                      style: TextStyle(fontSize: 40,color: Colors.white)
-                    ),
+                    child: Text('Shopping App',
+                        style: TextStyle(fontSize: 40, color: Colors.white)),
                   ),
                   SizedBox(
                     height: 20,
@@ -64,6 +63,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         padding: EdgeInsets.all(15),
                         color: Colors.teal,
                         onPressed: () {
+                          setState(() {
+                            isAuthorized = true;
+                          });
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -78,12 +80,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       ),
                     ),
                     Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 20.0, vertical: 10.0),
                       child: FlatButton(
                         padding: EdgeInsets.all(15),
                         color: Colors.teal,
                         onPressed: () {
+                          setState(() {
+                            isAuthorized = true;
+                          });
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -103,6 +108,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       child: FlatButton(
                         padding: EdgeInsets.all(15),
                         onPressed: () {
+                          setState(() {
+                            isAuthorized = false;
+                          });
                           Navigator.push(
                             context,
                             MaterialPageRoute(

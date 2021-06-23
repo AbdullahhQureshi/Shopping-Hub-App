@@ -15,16 +15,14 @@ class PaymentScreen extends StatefulWidget {
   static const routeName = '/payment';
 
   String number;
-  PaymentScreen({
-    this.number
-});
+  PaymentScreen({this.number});
 
   @override
   _PaymentScreenState createState() => _PaymentScreenState();
 }
 
 class _PaymentScreenState extends State<PaymentScreen> {
-  String amount ;
+  String amount;
   // final String authtoken= Auth().userid;
   final _addressController = TextEditingController();
   final _postalcodeController = TextEditingController();
@@ -39,9 +37,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
     super.initState();
     _phonenumberController.text = widget.number;
   }
+
   @override
   Widget build(BuildContext context) {
-    amount = (Provider.of<Cart>(context,listen: false).totalAmount).toString();
+    amount = (Provider.of<Cart>(context, listen: false).totalAmount).toString();
     // List<DropdownMenuItem<dynamic>> DropDownMenucontrylist = contrylist
     //     .map(
     //       (var value) => DropdownMenuItem(
@@ -90,11 +89,28 @@ class _PaymentScreenState extends State<PaymentScreen> {
               FlatButton(
                 padding: EdgeInsets.all(15),
                 color: Colors.deepOrangeAccent,
-                onPressed: () async{
-                  showDialog(context: context,barrierDismissible: false,builder: (context)=>ProgressDialog(status: 'Loading...'),);
-                  var response = await submit(_phonenumberController.text, amount);
+                onPressed: () async {
+                  showDialog(
+                    context: context,
+                    barrierDismissible: false,
+                    builder: (context) => ProgressDialog(status: 'Loading...'),
+                  );
+                  var response =
+                      await submit(_phonenumberController.text, amount);
                   Navigator.pop(context);
-                  showDialog(context: context,barrierDismissible: true,builder: (context)=>SuccessDialog(text: 'Successful'),);
+                  print(response);
+                  String message;
+                  try {
+                    message = (response['pp_ResponseMessage'])
+                        .replaceAll('pp_Amount', 'Amount');
+                  } catch (e) {
+                    message = (response['pp_ResponseMessage']);
+                  }
+                  showDialog(
+                    context: context,
+                    barrierDismissible: true,
+                    builder: (context) => SuccessDialog(text: message,status: response['pp_ResponseCode']),
+                  );
                   print(amount);
                 },
                 child: Text(
@@ -109,7 +125,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
     );
   }
 
-  Future<String> payment(String phoneNumber, String amount) async {
+  Future<Map<String, dynamic>> payment(
+      String phoneNumber, String amount) async {
     var digest;
     String tre =
         "T" + (DateFormat("yyyyMMddHHmmss").format(DateTime.now())).toString();
@@ -194,22 +211,15 @@ class _PaymentScreenState extends State<PaymentScreen> {
     });
 
     print("response=> ${(response.body).runtimeType}");
-    return (response.body as String);
+    return (json.decode(response.body));
   }
 
-
-
-  Future<String> submit(String phonenumber, String amount) async {
+  Future<Map<String, dynamic>> submit(String phonenumber, String amount) async {
     if (_formkey.currentState.validate()) {
-
-      String response = await payment(phonenumber, amount);
-      Provider.of<Auth>(context, listen: false).uploadJazzcashNumber(
-          phonenumber);
+      var response = await payment(phonenumber, amount);
+      Provider.of<Auth>(context, listen: false)
+          .uploadJazzcashNumber(phonenumber);
       return response;
-
-
-
     }
-
   }
 }

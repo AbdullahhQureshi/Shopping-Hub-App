@@ -8,6 +8,7 @@ import 'package:shopping_app/widget/infodialogue.dart';
 import 'package:shopping_app/widget/product_list.dart';
 import 'package:shopping_app/provider/product.dart';
 
+import '../main.dart';
 import 'cart_screen.dart';
 
 class ProductScreen extends StatefulWidget {
@@ -19,8 +20,6 @@ class ProductScreen extends StatefulWidget {
 }
 
 class _ProductScreenState extends State<ProductScreen> {
-
-
 // void initDialog() {
 //     showDialog(
 //       context: context,
@@ -43,12 +42,13 @@ class _ProductScreenState extends State<ProductScreen> {
 //     });
 //   }
 
-@override
-void initState() {
-  // TODO: implement initState
-  super.initState();
-  // initDialog();
-}
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // initDialog();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,20 +56,22 @@ void initState() {
         title: Text("Searched Product", textAlign: TextAlign.center),
         backgroundColor: Colors.teal,
         actions: [
-          Consumer<Cart>(
-            builder: (_, cart, ch) => Badge(
-              child: ch,
-              value: cart.itemCount.toString(),
-            ),
-            child: IconButton(
-              icon: Icon(
-                Icons.shopping_cart,
-              ),
-              onPressed: () {
-                Navigator.of(context).pushNamed(CartScreen.routeName);
-              },
-            ),
-          ),
+          isAuthorized
+              ? Consumer<Cart>(
+                  builder: (_, cart, ch) => Badge(
+                    child: ch,
+                    value: cart.itemCount.toString(),
+                  ),
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.shopping_cart,
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(CartScreen.routeName);
+                    },
+                  ),
+                )
+              : Container(),
         ],
       ),
       body: Container(

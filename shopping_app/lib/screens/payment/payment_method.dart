@@ -5,7 +5,7 @@ import 'package:shopping_app/screens/payment/payment_screen.dart';
 import 'package:shopping_app/widget/progressdialogue.dart';
 
 class PaymentMethod extends StatelessWidget {
-  static const routeName="/paymentmethod";
+  static const routeName = "/paymentmethod";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,31 +18,37 @@ class PaymentMethod extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-
             Padding(
-              padding:
-              EdgeInsets.symmetric(horizontal: 20, vertical: 10.0),
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10.0),
               child: FlatButton(
                 padding: EdgeInsets.all(15),
                 color: Colors.teal,
-                onPressed: () async{
-                 // Navigator.of(context).pushNamed(PaymentScreen.routeName);
-                  showDialog(context: context,barrierDismissible: false,builder: (context)=>ProgressDialog(status: 'Loading...'),);
-                 Map response1 = await (Provider.of<Auth>(context,listen: false).fetchJazzcashNumber());
-                 List keys=[];
-                 response1.forEach((key, value) {
-                   keys.add(key);
-                 });
+                onPressed: () async {
+                  // Navigator.of(context).pushNamed(PaymentScreen.routeName);
+                  showDialog(
+                    context: context,
+                    barrierDismissible: false,
+                    builder: (context) => ProgressDialog(status: 'Loading...'),
+                  );
+                  Map response1 =
+                      await (Provider.of<Auth>(context, listen: false)
+                          .fetchJazzcashNumber());
+                  List keys = [];
+                  response1.forEach((key, value) {
+                    keys.add(key);
+                  });
 
-                 String number = response1[keys[1]]['jazzcashNumber'];
-
-
-                 Navigator.push(
-                   context,
-                   MaterialPageRoute(
-                     builder: (context) => PaymentScreen(number: number,),
-                   ),
-                 );
+                  String number = response1[keys[1]]['jazzcashNumber'];
+                  print(number);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PaymentScreen(
+                        number: number,
+                      ),
+                    ),
+                  );
+                  // Navigator.pop(context);
                 },
                 child: Text(
                   'Jazzcash',

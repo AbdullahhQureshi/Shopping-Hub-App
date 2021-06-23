@@ -21,7 +21,7 @@ import 'package:shopping_app/screens/sub_categories/watch.dart';
 import 'package:shopping_app/screens/sub_categories/shoe.dart';
 import 'package:shopping_app/screens/sub_categories/laptop.dart';
 
-
+import '../main.dart';
 import 'cart_screen.dart';
 
 enum FilterOptions {
@@ -30,7 +30,7 @@ enum FilterOptions {
 }
 
 class Allproduct extends StatefulWidget {
-  static const routeName = '/allproduct';
+  static String routeName = '/allproduct';
 
   @override
   _AllproductState createState() => _AllproductState();
@@ -41,29 +41,24 @@ class _AllproductState extends State<Allproduct> {
   SpeechRecognition _speechRecognition;
   bool _isAvailable = false;
   bool _isListening = false;
-  final _search =TextEditingController();
+  final _search = TextEditingController();
   //String resultText = _search.text;
-
-
-
 
   @override
   void initState() {
     initSpeechRecognizer();
     super.initState();
-
   }
-
 
   void initSpeechRecognizer() {
     _speechRecognition = SpeechRecognition();
 
     _speechRecognition.setAvailabilityHandler(
-          (bool result) => setState(() => _isAvailable = result),
+      (bool result) => setState(() => _isAvailable = result),
     );
 
     _speechRecognition.setRecognitionStartedHandler(
-          () => setState(() => _isListening = true),
+      () => setState(() => _isListening = true),
     );
     void onRecognitionResult(String text) {
       setState(() {
@@ -75,12 +70,12 @@ class _AllproductState extends State<Allproduct> {
     void onRecognitionComplete() {
       setState(() {
         _isListening = false;
-     //   _handleSubmitted(resultText);
+        //   _handleSubmitted(resultText);
       });
     }
+
     _speechRecognition.setRecognitionResultHandler(onRecognitionResult);
     _speechRecognition.setRecognitionCompleteHandler(onRecognitionComplete);
-
   }
 
 /*
@@ -105,20 +100,18 @@ class _AllproductState extends State<Allproduct> {
                      setState(() {
                        completeResultText = resultText;
                        searchkeyword=resultText;
-                     });*//*
+                     });*/ /*
 
 
             }
     );
 */
 
-    // _speechRecognition.activate().then(
-    //       (result) => setState(() => _isAvailable = result),
-    // );
+  // _speechRecognition.activate().then(
+  //       (result) => setState(() => _isAvailable = result),
+  // );
 
-
-
- /* @override
+  /* @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
     if(_isInit) {
@@ -161,26 +154,30 @@ class _AllproductState extends State<Allproduct> {
               ),
             ],
           ),
-          Consumer<Cart>(
-            builder: (_, cart, ch) => Badge(
-              child: ch,
-              value: cart.itemCount.toString(),
-            ),
-            child: IconButton(
-              icon: Icon(
-                Icons.shopping_cart,
-              ),
-              onPressed: () {
-                Navigator.of(context).pushNamed(CartScreen.routeName);
-              },
-            ),
-          ),
+          isAuthorized
+              ? Consumer<Cart>(
+                  builder: (_, cart, ch) => Badge(
+                    child: ch,
+                    value: cart.itemCount.toString(),
+                  ),
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.shopping_cart,
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(CartScreen.routeName);
+                    },
+                  ),
+                )
+              : Container(),
         ],
       ),
       drawer: AppDrawer(),
       body: SingleChildScrollView(
         child: Column(children: <Widget>[
-          SizedBox(height: 5,),
+          SizedBox(
+            height: 5,
+          ),
           TextField(
             controller: _search,
             keyboardType: TextInputType.emailAddress,
@@ -191,7 +188,7 @@ class _AllproductState extends State<Allproduct> {
                 borderSide: BorderSide(color: Colors.blue),
               ),
             ),
-            onChanged: (value){},
+            onChanged: (value) {},
           ),
           /*Container(
             width: MediaQuery.of(context).size.width *0.9 ,
@@ -216,156 +213,161 @@ class _AllproductState extends State<Allproduct> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-
-
-                   Expanded(
-                     flex:1,
-                     child: Card(
-                       child: FlatButton(
-                          // padding: EdgeInsets.all(15),
-                          child: Text(
-                            'clear textfield',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                                fontSize: 14),
-                          ),
-                          onPressed: () {
-                            setState(() {
-                             _search.text ="";
-                             // completeResultText='';
-                            });
-
-
-                          },
-                        ),
-                     ),
-                   ),
-
                 Expanded(
-                  flex:1,
+                  flex: 1,
+                  child: Card(
+                    child: FlatButton(
+                      // padding: EdgeInsets.all(15),
+                      child: Text(
+                        'clear textfield',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                            fontSize: 14),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _search.text = "";
+                          // completeResultText='';
+                        });
+                      },
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
                   child: Card(
                     child: FlatButton(
                       padding: EdgeInsets.all(5),
                       child: Text(
                         'Voice Input',
-                        style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold, color: Colors.black),
+                        style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black),
                       ),
                       onPressed: () {
-                        if (  !_isListening)
-                          _speechRecognition.listen(locale: "en_US");//.then((result) => resultText=result);
+                        if (!_isListening)
+                          _speechRecognition.listen(
+                              locale:
+                                  "en_US"); //.then((result) => resultText=result);
                       },
                     ),
                   ),
                 ),
-
-
-
-
                 Expanded(
-                  flex:1,
+                  flex: 1,
                   child: Card(
                     child: FlatButton(
-                        onPressed: (){
-                          showDialog(context: context,barrierDismissible: false,builder: (context)=>ProgressDialog(status: 'Loading...'),);
-                          Provider.of<Products>(context,listen: false).FetchandSetProducts(_search.text);
-                          Navigator.of(context).pushNamed(ProductScreen.routeName);
-                            //initDialog();
-                        },
-                        padding: EdgeInsets.all(5),
-                        child: Text(
-                          'search',
-                          style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold,color: Colors.black),
-                        ),
-
-
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (context) =>
+                              ProgressDialog(status: 'Loading...'),
+                        );
+                        Provider.of<Products>(context, listen: false)
+                            .FetchandSetProducts(_search.text);
+                        Navigator.of(context)
+                            .pushNamed(ProductScreen.routeName);
+                        //initDialog();
+                      },
+                      padding: EdgeInsets.all(5),
+                      child: Text(
+                        'search',
+                        style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black),
+                      ),
                     ),
                   ),
                 ),
               ],
             ),
           ),
-
           Container(
-            height: MediaQuery.of(context).size.height*0.1,
+            height: MediaQuery.of(context).size.height * 0.1,
             width: MediaQuery.of(context).size.width,
-
-            child: Text("Categories", textAlign: TextAlign.center,style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),
+            child: Text(
+              "Categories",
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
             ),
           ),
-
- 
           ListView(
             shrinkWrap: true,
-           scrollDirection: Axis.vertical,
+            scrollDirection: Axis.vertical,
             padding: EdgeInsets.all(3),
-          children: [
-            Card(
-              elevation: 2.0,
-              child: ListTile(
-                leading: Icon(FontAwesomeIcons.phone),
-                trailing: Icon(Icons.arrow_forward_ios),
-                title: Text("Phone"),
-                onTap: (){
-                  Provider.of<Products>(context,listen: false).FetchandSetProducts("Phone");
-                  Navigator.of(context).pushNamed(Phone.routename);
-                },
+            children: [
+              Card(
+                elevation: 2.0,
+                child: ListTile(
+                  leading: Icon(FontAwesomeIcons.phone),
+                  trailing: Icon(Icons.arrow_forward_ios),
+                  title: Text("Phone"),
+                  onTap: () {
+                    Provider.of<Products>(context, listen: false)
+                        .FetchandSetProducts("Phone");
+                    Navigator.of(context).pushNamed(Phone.routename);
+                  },
+                ),
               ),
-            ),
-            Card(
-              elevation: 2.0,
-              child: ListTile(
-                leading: Icon(FontAwesomeIcons.shoppingBag),
-                trailing: Icon(Icons.arrow_forward_ios),
-                title: Text("Bag"),
-                onTap: (){
-                  Provider.of<Products>(context,listen: false).FetchandSetProducts("Bag");
-                  Navigator.of(context).pushNamed(Bag.routename);
-                },
+              Card(
+                elevation: 2.0,
+                child: ListTile(
+                  leading: Icon(FontAwesomeIcons.shoppingBag),
+                  trailing: Icon(Icons.arrow_forward_ios),
+                  title: Text("Bag"),
+                  onTap: () {
+                    Provider.of<Products>(context, listen: false)
+                        .FetchandSetProducts("Bag");
+                    Navigator.of(context).pushNamed(Bag.routename);
+                  },
+                ),
               ),
-            ),
-            Card(
-              elevation: 2.0,
-              child: ListTile(
-                leading: Icon(FontAwesomeIcons.stopwatch),
-                trailing: Icon(Icons.arrow_forward_ios),
-                title: Text("Watch"),
-                onTap: (){
-                  Provider.of<Products>(context,listen: false).FetchandSetProducts("Watch");
-                  Navigator.of(context).pushNamed(Watch.routename);
-                },
+              Card(
+                elevation: 2.0,
+                child: ListTile(
+                  leading: Icon(FontAwesomeIcons.stopwatch),
+                  trailing: Icon(Icons.arrow_forward_ios),
+                  title: Text("Watch"),
+                  onTap: () {
+                    Provider.of<Products>(context, listen: false)
+                        .FetchandSetProducts("Watch");
+                    Navigator.of(context).pushNamed(Watch.routename);
+                  },
+                ),
               ),
-            ),
-            Card(
-              elevation: 2.0,
-              child: ListTile(
-                leading: Icon(FontAwesomeIcons.shoePrints),
-                trailing: Icon(Icons.arrow_forward_ios),
-                title: Text("Shoes"),
-                onTap: (){
-                  Provider.of<Products>(context,listen: false).FetchandSetProducts("Shoes");
-                  Navigator.of(context).pushNamed(Shoe.routename);
-                },
+              Card(
+                elevation: 2.0,
+                child: ListTile(
+                  leading: Icon(FontAwesomeIcons.shoePrints),
+                  trailing: Icon(Icons.arrow_forward_ios),
+                  title: Text("Shoes"),
+                  onTap: () {
+                    Provider.of<Products>(context, listen: false)
+                        .FetchandSetProducts("Shoes");
+                    Navigator.of(context).pushNamed(Shoe.routename);
+                  },
+                ),
               ),
-            ),
+              Card(
+                elevation: 2.0,
+                child: ListTile(
+                  leading: Icon(FontAwesomeIcons.laptop),
+                  trailing: Icon(Icons.arrow_forward_ios),
+                  title: Text("Laptop"),
+                  onTap: () {
+                    Provider.of<Products>(context, listen: false)
+                        .FetchandSetProducts("Laptop");
+                    Navigator.of(context).pushNamed(Laptop.routename);
+                  },
+                ),
+              ),
+            ],
 
-
-            Card(
-              elevation: 2.0,
-              child: ListTile(
-                leading: Icon(FontAwesomeIcons.laptop),
-                trailing: Icon(Icons.arrow_forward_ios),
-                title: Text("Laptop"),
-                onTap: (){
-                  Provider.of<Products>(context,listen: false).FetchandSetProducts("Laptop");
-                  Navigator.of(context).pushNamed(Laptop.routename);
-                },
-              ),
-            ),
-
-          ],
-
-          /*  children: <Widget>[
+            /*  children: <Widget>[
 
               Container(
                height: MediaQuery.of(context).size.height*0.06,
@@ -497,9 +499,6 @@ class _AllproductState extends State<Allproduct> {
             ],*/
           ),
 
-
-
-
           /*Container(
             height: MediaQuery.of(context).size.height,
             padding: EdgeInsets.all(10),
@@ -537,7 +536,7 @@ class _AllproductState extends State<Allproduct> {
 
   }
 */
-  }
+}
 
 
 /**/

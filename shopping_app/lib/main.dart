@@ -23,10 +23,10 @@ import 'package:shopping_app/screens/sub_categories/watch.dart';
 import 'package:shopping_app/screens/sub_categories/shoe.dart';
 import 'package:shopping_app/screens/sub_categories/laptop.dart';
 
+bool isAuthorized;
 String userId;
 
 void main() {
-
   runApp(
     MyApp(), // Wrap your app
   );
@@ -37,7 +37,6 @@ class MyApp extends StatelessWidget {
   Widget build(context) {
     return MultiProvider(
         providers: [
-
           ChangeNotifierProvider.value(
             value: Auth(),
           ),
@@ -50,31 +49,31 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(
             create: (context) => Orders(),
           ),
-
         ],
         child: Consumer<Auth>(
             builder: (ctx, auth, _) => MaterialApp(
-              debugShowCheckedModeBanner: false,
-                initialRoute: userId != null ? Allproduct.routeName : WelcomeScreen.routeName,
-                routes: {
-                  Productdetail.routName: (ctx) => Productdetail(),
-                  CartScreen.routeName: (ctx) => CartScreen(),
-                  OrdersScreen.routeName: (ctx) => OrdersScreen(),
-                  Allproduct.routeName: (ctx) => Allproduct(),
-                  UserProductsScreen.routeName: (ctx) =>
-                      UserProductsScreen(),
-                  EditProductScreen.routeName: (ctx) => EditProductScreen(),
-                  PaymentScreen.routeName: (ctx)=>PaymentScreen(),
-                  ProductScreen.routeName: (ctx)=>ProductScreen(),
-                  EditProfile.routeName: (ctx)=>EditProfile(),
-                  WelcomeScreen.routeName: (ctx)=>WelcomeScreen(),
-                  Phone.routename: (ctx)=>Phone(),
-                  Bag.routename: (ctx)=>Bag(),
-                  Watch.routename:(ctx)=>Watch(),
-                  Shoe.routename:(ctx)=>Shoe(),
-                  Laptop.routename:(ctx)=>Laptop(),
-                  PaymentMethod.routeName:(ctx)=>PaymentMethod(),
-                })));
+                    debugShowCheckedModeBanner: false,
+                    initialRoute: userId != null
+                        ? Allproduct.routeName
+                        : WelcomeScreen.routeName,
+                    routes: {
+                      Productdetail.routName: (ctx) => Productdetail(),
+                      CartScreen.routeName: (ctx) => CartScreen(),
+                      OrdersScreen.routeName: (ctx) => OrdersScreen(),
+                      Allproduct.routeName: (ctx) => Allproduct(),
+                      UserProductsScreen.routeName: (ctx) =>
+                          UserProductsScreen(),
+                      EditProductScreen.routeName: (ctx) => EditProductScreen(),
+                      PaymentScreen.routeName: (ctx) => PaymentScreen(),
+                      ProductScreen.routeName: (ctx) => ProductScreen(),
+                      EditProfile.routeName: (ctx) => EditProfile(),
+                      WelcomeScreen.routeName: (ctx) => WelcomeScreen(),
+                      Phone.routename: (ctx) => Phone(),
+                      Bag.routename: (ctx) => Bag(),
+                      Watch.routename: (ctx) => Watch(),
+                      Shoe.routename: (ctx) => Shoe(),
+                      Laptop.routename: (ctx) => Laptop(),
+                      PaymentMethod.routeName: (ctx) => PaymentMethod(),
+                    })));
   }
 }
-

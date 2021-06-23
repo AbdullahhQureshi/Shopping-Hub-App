@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 
+import '../screens/allproduct_screen.dart';
+import '../screens/allproduct_screen.dart';
+
 class SuccessDialog extends StatelessWidget {
   String text;
-  SuccessDialog({this.text});
+  String status;
+  SuccessDialog({this.text,this.status});
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -39,6 +43,19 @@ class SuccessDialog extends StatelessWidget {
                     text,
                     textAlign: TextAlign.center,
                   ),
+                ),
+                status == '000'? Row(
+                  children: [
+                    Expanded(child: TextButton(onPressed: (){
+                      Navigator.pushNamedAndRemoveUntil(context, Allproduct.routeName, (route) => false);
+                    }, child: Text('Okay'))),
+                  ],
+                ):Row(
+                  children: [
+                    Expanded(child: TextButton(onPressed: (){
+                      Navigator.pop(context);
+                    }, child: Text('TryAgaun'))),
+                  ],
                 ),
               ],
             ),
