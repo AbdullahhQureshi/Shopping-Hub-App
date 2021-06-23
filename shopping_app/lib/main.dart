@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:shopping_app/provider/auth.dart';
 import 'package:shopping_app/provider/products.dart';
 import 'package:shopping_app/provider/cart.dart';
+import 'package:shopping_app/screens/271%20splash-screen.dart';
 import 'package:shopping_app/screens/allproduct_screen.dart';
 import 'package:shopping_app/screens/edit_product_screen.dart';
 import 'package:shopping_app/screens/edit_profile.dart';
@@ -23,7 +24,7 @@ import 'package:shopping_app/screens/sub_categories/watch.dart';
 import 'package:shopping_app/screens/sub_categories/shoe.dart';
 import 'package:shopping_app/screens/sub_categories/laptop.dart';
 
-bool isAuthorized;
+bool isAuthorized =true;
 String userId;
 
 void main() {
@@ -53,10 +54,17 @@ class MyApp extends StatelessWidget {
         child: Consumer<Auth>(
             builder: (ctx, auth, _) => MaterialApp(
                     debugShowCheckedModeBanner: false,
-                    initialRoute: userId != null
-                        ? Allproduct.routeName
-                        : WelcomeScreen.routeName,
-                    routes: {
+                home: auth.isAuth
+                    ? Allproduct()
+                    : FutureBuilder(
+                  future: auth.tryAutoLogin(),
+                  builder: (ctx, authResultSnapshot) =>
+                  authResultSnapshot.connectionState ==
+                      ConnectionState.waiting
+                      ? SplashScreen()
+                      : WelcomeScreen(),
+                ),
+                routes: {
                       Productdetail.routName: (ctx) => Productdetail(),
                       CartScreen.routeName: (ctx) => CartScreen(),
                       OrdersScreen.routeName: (ctx) => OrdersScreen(),

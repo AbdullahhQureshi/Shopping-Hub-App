@@ -20,8 +20,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="39d8fa67-a531-4792-9454-ac47c91c9376" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/shopping_app/lib/screens/after_skip.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shopping_app/lib/screens/271 splash-screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shopping_app/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/shopping_app/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shopping_app/lib/provider/auth.dart" beforeDir="false" afterPath="$PROJECT_DIR$/shopping_app/lib/provider/auth.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shopping_app/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/shopping_app/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shopping_app/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/shopping_app/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +58,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../flutter-boilerplate-master" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../shopping-app/shopping_app" />
     <property name="settings.editor.selected.configurable" value="dart.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
@@ -101,30 +106,30 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="413" y="111" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1623797220537" />
-    <state x="110" y="120" width="1146" height="488" key="AVDManager" timestamp="1624380950314">
+    <state x="110" y="120" width="1146" height="488" key="AVDManager" timestamp="1624428080155">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="110" y="120" width="1146" height="488" key="AVDManager/0.0.1366.728@0.0.1366.728" timestamp="1624380950314" />
-    <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1624379366721">
+    <state x="110" y="120" width="1146" height="488" key="AVDManager/0.0.1366.728@0.0.1366.728" timestamp="1624428080155" />
+    <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1624427048036">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1624379366721" />
-    <state width="1306" height="172" key="GridCell.Tab.0.bottom" timestamp="1624384393702">
+    <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1624427048036" />
+    <state width="1323" height="110" key="GridCell.Tab.0.bottom" timestamp="1624429621815">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1306" height="172" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1624384393702" />
-    <state width="1306" height="172" key="GridCell.Tab.0.center" timestamp="1624384393701">
+    <state width="1323" height="110" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1624429621815" />
+    <state width="1323" height="110" key="GridCell.Tab.0.center" timestamp="1624429621815">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1306" height="172" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1624384393701" />
-    <state width="1306" height="172" key="GridCell.Tab.0.left" timestamp="1624384393701">
+    <state width="1323" height="110" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1624429621815" />
+    <state width="1323" height="110" key="GridCell.Tab.0.left" timestamp="1624429621814">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1306" height="172" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1624384393701" />
-    <state width="1306" height="172" key="GridCell.Tab.0.right" timestamp="1624384393701">
+    <state width="1323" height="110" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1624429621814" />
+    <state width="1323" height="110" key="GridCell.Tab.0.right" timestamp="1624429621815">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1306" height="172" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1624384393701" />
+    <state width="1323" height="110" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1624429621815" />
     <state x="263" y="107" key="IDE.errors.dialog" timestamp="1619208409152">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shopping_app/main.dart';
 import 'dart:convert';
 import 'package:shopping_app/models/http_exception.dart';
@@ -8,6 +11,7 @@ class Auth with ChangeNotifier {
   String _token;
   DateTime _expirydate;
   String _userid;
+  Timer _authTimer;
 
 
   bool get isAuth {
@@ -45,6 +49,15 @@ class Auth with ChangeNotifier {
       _expirydate = DateTime.now()
           .add(Duration(seconds: int.parse(responsedata['expiresIn'])));
       notifyListeners();
+      final prefs = await SharedPreferences.getInstance();
+      final userData = json.encode(
+        {
+          'token': _token,
+          'userId': _userid,
+          'expiryDate': _expirydate.toIso8601String(),
+        },
+      );
+      prefs.setString('userData', userData);
     } catch (error) {
       throw error;
     }
@@ -57,6 +70,46 @@ class Auth with ChangeNotifier {
   Future<void> login(String email, String password) async {
     return _authenticate(email, password, 'accounts:signInWithPassword');
   }
+
+
+
+  Future<bool> tryAutoLogin() async {
+    final prefs = await SharedPreferences.getInstance();
+    if (!prefs.containsKey('userData')) {
+      return false;
+    }
+    final extractedUserData = json.decode(prefs.getString('userData')) as Map<String, Object>;
+    final expiryDate = DateTime.parse(extractedUserData['expiryDate']);
+
+    if (expiryDate.isBefore(DateTime.now())) {
+      return false;
+    }
+    _token = extractedUserData['token'];
+    _userid = extractedUserData['userId'];
+    _expirydate = expiryDate;
+    notifyListeners();
+    // _autoLogout();
+    return true;
+  }
+
+
+
+  Future<void> logout() async {
+    _token = null;
+    _userid = null;
+    _expirydate = null;
+
+    if (_authTimer != null) {
+      _authTimer.cancel();
+      _authTimer = null;
+    }
+    notifyListeners();
+    final prefs = await SharedPreferences.getInstance();
+    // prefs.remove('userData');
+    prefs.clear();
+  }
+
+
   Future<void> Upload_data(String username,String address,String phonenumber) async{
     final url="https://shpping-app-2be1d-default-rtdb.firebaseio.com/$_userid.json?auth=$_token";
     try{
