@@ -23,14 +23,9 @@ class PaymentScreen extends StatefulWidget {
 
 class _PaymentScreenState extends State<PaymentScreen> {
   String amount;
-  // final String authtoken= Auth().userid;
-  final _addressController = TextEditingController();
-  final _postalcodeController = TextEditingController();
-  final _fullnameController = TextEditingController();
   final _phonenumberController = TextEditingController();
   var pickupSelected;
   var _formkey = GlobalKey<FormState>();
-  // List contrylist = ["Pakistan", "UnitedStates", "India", "southafrica"];
   @override
   void initState() {
     // TODO: implement initState

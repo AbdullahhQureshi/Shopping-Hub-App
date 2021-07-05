@@ -130,30 +130,30 @@ class _AllproductState extends State<Allproduct> {
         backgroundColor: Colors.teal,
         title: Text('Products'),
         actions: <Widget>[
-          PopupMenuButton(
-            onSelected: (FilterOptions selectedValue) {
-              setState(() {
-                if (selectedValue == FilterOptions.Favorites) {
-                  _showOnlyFavorites = true;
-                } else {
-                  _showOnlyFavorites = false;
-                }
-              });
-            },
-            icon: Icon(
-              Icons.more_vert,
-            ),
-            itemBuilder: (_) => [
-              PopupMenuItem(
-                child: Text('Only Favorites'),
-                value: FilterOptions.Favorites,
-              ),
-              PopupMenuItem(
-                child: Text('Show All'),
-                value: FilterOptions.All,
-              ),
-            ],
-          ),
+          // PopupMenuButton(
+          //   onSelected: (FilterOptions selectedValue) {
+          //     setState(() {
+          //       if (selectedValue == FilterOptions.Favorites) {
+          //         _showOnlyFavorites = true;
+          //       } else {
+          //         _showOnlyFavorites = false;
+          //       }
+          //     });
+          //   },
+          //   icon: Icon(
+          //     Icons.more_vert,
+          //   ),
+          //   itemBuilder: (_) => [
+          //     PopupMenuItem(
+          //       child: Text('Only Favorites'),
+          //       value: FilterOptions.Favorites,
+          //     ),
+          //     PopupMenuItem(
+          //       child: Text('Show All'),
+          //       value: FilterOptions.All,
+          //     ),
+          //   ],
+          // ),
           isAuthorized
               ? Consumer<Cart>(
                   builder: (_, cart, ch) => Badge(

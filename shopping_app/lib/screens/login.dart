@@ -8,6 +8,10 @@ import 'package:shopping_app/provider/regex_pattern.dart';
 import 'package:shopping_app/screens/allproduct_screen.dart';
 import 'package:shopping_app/widget/progressdialogue.dart';
 import 'package:speech_recognition/speech_recognition.dart';
+import 'package:speech_to_text/speech_to_text.dart' as stt;
+
+
+
 
 class LoginScreen extends StatefulWidget {
   static const routeName = '/login';
@@ -30,16 +34,24 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _isAvailable = false;
   bool _isListening = false;
   //String resultText = "Search input";
-
-
-
+  stt.SpeechToText _speech;
+  String _text = 'Press the button and start speaking';
+  double _confidence = 1.0;
 
   @override
   void initState() {
-    initSpeechRecognizer();
     super.initState();
-    // print('looking: $userId');
+    _speech = stt.SpeechToText();
+    initSpeechRecognizer();
   }
+
+
+  // @override
+  // void initState() {
+  //   initSpeechRecognizer();
+  //   super.initState();
+  //   // print('looking: $userId');
+  // }
 
 
   void initSpeechRecognizer() {
@@ -56,8 +68,9 @@ class _LoginScreenState extends State<LoginScreen> {
       setState(() {
 
         if(email) {
-          _emailController.text = text.replaceAll(" ", "").replaceAll("atrate", "@").replaceAll('attherate', '@').replaceAll('one', '1').replaceAll('two', '2').replaceAll('three', '3').replaceAll('four', '4').replaceAll('for', '4').replaceAll('five', '5').replaceAll('six', '6').replaceAll('sex', '6').replaceAll('seven', '7');
+          // _emailController.text = text.replaceAll(" ", "").replaceAll("atrate", "@").replaceAll('attherate', '@').replaceAll('one', '1').replaceAll('two', '2').replaceAll('three', '3').replaceAll('four', '4').replaceAll('for', '4').replaceAll('five', '5').replaceAll('six', '6').replaceAll('sex', '6').replaceAll('seven', '7');
 
+          _text=text;
         }
         else if(password)
           _passwordController.text=text.replaceAll(" ", "").replaceAll("space", " ");
@@ -154,11 +167,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   padding: EdgeInsets.only(left: 20.0,right: 20.0),
                   child: FlatButton(onPressed: () {
                     password=false;
-                    email=true;
-                    if (  !_isListening) {
-                      _speechRecognition.listen(
-                          locale: "en_US"); //.then((result) => resultText=result);
-                    }
+                    _listen();
+                    //email=true;
+                    // if (  !_isListening) {
+                    //   _speechRecognition.listen(
+                    //       locale: "en_US"); //.then((result) => resultText=result);
+                    // }
                     //email=false;
                   },
                       child: Text("input email",
@@ -322,5 +336,30 @@ class _LoginScreenState extends State<LoginScreen> {
       _showErrorDialog(errorMsg);
     }
 
+  }
+
+
+  void _listen() async {
+    if (!_isListening) {
+      bool available = await _speech.initialize(
+        onStatus: (val) => print('onStatus: $val'),
+        onError: (val) => print('onError: $val'),
+      );
+      if (available) {
+        setState(() => _isListening = true);
+        _speech.listen(
+          onResult: (val) => setState(() {
+            _emailController.text = (val.recognizedWords).replaceAll(" ", "").replaceAll("atrate", "@").replaceAll('attherate', '@').replaceAll('one', '1').replaceAll('two', '2').replaceAll("to", '2').replaceAll('three', '3').replaceAll('four', '4').replaceAll('for', '4').replaceAll('five', '5').replaceAll('six', '6').replaceAll('sex', '6').replaceAll('seven', '7');
+
+          }),
+        );
+        setState(() {
+          _isListening=false;
+        });
+      }
+    } else {
+      setState(() => _isListening = false);
+      _speech.stop();
+    }
   }
 }
