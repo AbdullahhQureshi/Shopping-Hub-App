@@ -18,7 +18,7 @@ class CartScreen extends StatelessWidget {
         backgroundColor: Colors.teal,
         title: Text('Your Cart'),
         actions: [
-          IconButton(icon: Icon(Icons.delete), onPressed: ()=>cart.clear())
+          IconButton(icon: Icon(Icons.delete), onPressed: () => cart.clear())
         ],
       ),
       body: Column(
@@ -39,7 +39,8 @@ class CartScreen extends StatelessWidget {
                     label: Text(
                       '\$${cart.totalAmount}',
                       style: TextStyle(
-                        color: Theme.of(context).primaryTextTheme.headline6.color,
+                        color:
+                            Theme.of(context).primaryTextTheme.headline6.color,
                       ),
                     ),
                     backgroundColor: Theme.of(context).primaryColor,
@@ -52,7 +53,8 @@ class CartScreen extends StatelessWidget {
                         cart.totalAmount,
                       );
                       //cart.clear();
-                      Navigator.of(context).pushNamed(PaymentMethod.routeName);
+                      Navigator.of(context)
+                          .pushNamed(PaymentMethodPage.routeName);
                     },
                     textColor: Theme.of(context).primaryColor,
                   )

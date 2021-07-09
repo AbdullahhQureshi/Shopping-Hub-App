@@ -20,12 +20,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="39d8fa67-a531-4792-9454-ac47c91c9376" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rzp.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shopping_app/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/shopping_app/android/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shopping_app/lib/screens/allproduct_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/shopping_app/lib/screens/allproduct_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shopping_app/lib/screens/login.dart" beforeDir="false" afterPath="$PROJECT_DIR$/shopping_app/lib/screens/login.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shopping_app/lib/screens/payment/payment_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/shopping_app/lib/screens/payment/payment_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shopping_app/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/shopping_app/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shopping_app/lib/screens/cart_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/shopping_app/lib/screens/cart_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shopping_app/lib/screens/payment/payment_method.dart" beforeDir="false" afterPath="$PROJECT_DIR$/shopping_app/lib/screens/payment/payment_method.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shopping_app/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/shopping_app/pubspec.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shopping_app/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/shopping_app/pubspec.yaml" afterDir="false" />
     </list>
@@ -34,7 +35,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[My_Device_API_29]" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -59,11 +60,14 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../GoomExpressMobileApp" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="dart.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Github repository\Shopping-Hub-App01" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Aqib\Documents\GitHub\Shopping-Hub-App\shopping_app\lib\screens\payment" />
     </key>
@@ -115,22 +119,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1625336663381" />
-    <state width="1323" height="207" key="GridCell.Tab.0.bottom" timestamp="1624721372042">
+    <state width="981" height="116" key="GridCell.Tab.0.bottom" timestamp="1625671852423">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="207" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1624721372042" />
-    <state width="1323" height="207" key="GridCell.Tab.0.center" timestamp="1624721372042">
+    <state width="981" height="116" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1625671852423" />
+    <state width="981" height="116" key="GridCell.Tab.0.center" timestamp="1625671852423">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="207" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1624721372042" />
-    <state width="1323" height="207" key="GridCell.Tab.0.left" timestamp="1624721372042">
+    <state width="981" height="116" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1625671852423" />
+    <state width="981" height="116" key="GridCell.Tab.0.left" timestamp="1625671852422">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="207" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1624721372042" />
-    <state width="1323" height="207" key="GridCell.Tab.0.right" timestamp="1624721372042">
+    <state width="981" height="116" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1625671852422" />
+    <state width="981" height="116" key="GridCell.Tab.0.right" timestamp="1625671852423">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="207" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1624721372042" />
+    <state width="981" height="116" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1625671852423" />
     <state x="263" y="107" key="IDE.errors.dialog" timestamp="1619208409152">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

@@ -16,6 +16,7 @@ import 'package:provider/provider.dart';
 import 'package:shopping_app/screens/cart_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shopping_app/provider/order.dart';
+
 // import 'package:device_preview/device_preview.dart';
 import 'package:shopping_app/screens/payment/payment_screen.dart';
 import 'package:shopping_app/screens/sub_categories/phone.dart';
@@ -24,7 +25,7 @@ import 'package:shopping_app/screens/sub_categories/watch.dart';
 import 'package:shopping_app/screens/sub_categories/shoe.dart';
 import 'package:shopping_app/screens/sub_categories/laptop.dart';
 
-bool isAuthorized =true;
+bool isAuthorized = true;
 String userId;
 
 void main() {
@@ -53,19 +54,18 @@ class MyApp extends StatelessWidget {
         ],
         child: Consumer<Auth>(
             builder: (ctx, auth, _) => MaterialApp(
-              
-                    debugShowCheckedModeBanner: false,
-                home: auth.isAuth
-                    ? Allproduct()
-                    : FutureBuilder(
-                  future: auth.tryAutoLogin(),
-                  builder: (ctx, authResultSnapshot) =>
-                  authResultSnapshot.connectionState ==
-                      ConnectionState.waiting
-                      ? SplashScreen()
-                      : WelcomeScreen(),
-                ),
-                routes: {
+                debugShowCheckedModeBanner: false,
+                    home: auth.isAuth
+                        ? Allproduct()
+                        : FutureBuilder(
+                            future: auth.tryAutoLogin(),
+                            builder: (ctx, authResultSnapshot) =>
+                                authResultSnapshot.connectionState ==
+                                        ConnectionState.waiting
+                                    ? SplashScreen()
+                                    : WelcomeScreen(),
+                          ),
+                    routes: {
                       Productdetail.routName: (ctx) => Productdetail(),
                       CartScreen.routeName: (ctx) => CartScreen(),
                       OrdersScreen.routeName: (ctx) => OrdersScreen(),
@@ -82,7 +82,7 @@ class MyApp extends StatelessWidget {
                       Watch.routename: (ctx) => Watch(),
                       Shoe.routename: (ctx) => Shoe(),
                       Laptop.routename: (ctx) => Laptop(),
-                      PaymentMethod.routeName: (ctx) => PaymentMethod(),
+                      PaymentMethodPage.routeName: (ctx) => PaymentMethodPage(),
                     })));
   }
 }
